@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Camera</title>
+  </head>
+  <body>
+    <main></main>
+    <script src="../../config.js"></script>
+    <script src="../../libraries/js/socket.io.min.js"></script>
+    <script src="../../libraries/js/p5.js"></script>
+    <script>
+      const url = new URL(window.location.href);
+      const device_id = url.searchParams.get("id");
+
+      let socket;
+
+      function setup() {
+        createCanvas(400, 400);
+        socket = io(config.api_url);
+      }
+
+      function draw() {
+        background(51);
+        frameRate(1);
+        ellipse(random(width), random(height), 100, 100);
+
+        saveFrames("out", "png", 1, 1, (frames) => {
+          print(frames);
+          socket.emit("devices-camera-img", {
+            img: frames[0],
+            device_id,
+          });
+          // noLoop();
+        });
+      }
+    </script>
+  </body>
+</html>

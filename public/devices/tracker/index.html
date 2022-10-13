@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tracker</title>
+  </head>
+  <body>
+    <main>
+      <p>Latitude: <span id="lat">0</span></p>
+      <p>Longitude: <span id="lon">0</span></p>
+    </main>
+    <script src="../../libraries/js/socket.io.min.js"></script>
+    <script src="../../config.js"></script>
+    <script>
+      const url = new URL(window.location.href);
+      const device_id = url.searchParams.get("id");
+      const socket = io(config.api_url);
+
+      setInterval(() => {
+        try {
+          navigator.geolocation.getCurrentPosition((position) => {
+            const { latitude: lat, longitude: lon } = position.coords;
+            const pos = {
+              lat,
+              lon,
+              device_id,
+            };
+
+            document.getElementById("lat").innerText = pos.lat;
+            document.getElementById("lon").innerText = pos.lon;
+
+            socket.emit("devices-tracker-position", pos);
+          });
+        } catch (error) {
+          console.log(error);
+          alert(
+            "Houve um erro certifique-se de estar conectado a internet e permitir a geolocalização!"
+          );
+        }
+      }, 5000);
+    </script>
+  </body>
+</html>
