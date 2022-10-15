@@ -28,12 +28,16 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  console.log("New connection");
+  // console.log("New connection");
   // Trackers
   socket.on("devices-tracker-position", (data) => {
     db.devices.update(
       { _id: data.device_id },
-      { $set: { last_position: { lat: data.lat, lon: data.lon } } }
+      {
+        $set: {
+          last_position: { lat: data.lat, lon: data.lon, time: data.time },
+        },
+      }
     );
     io.emit("devices-tracker-position", data);
   });

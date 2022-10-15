@@ -5,9 +5,10 @@
 {"id":"1","def_name":"bell","name":"Bellbell","owner":"1","created_at":1665582343347,"removed":true,"_id":"9p9NbYo7sUN6HrqN"}
 {"id":"1","def_name":"bell","name":"General bell","owner":"1","created_at":1665574617465,"removed":true,"_id":"BzRRwuVCDHLhkEOm"}
 {"id":"2","def_name":"camera","name":"CAM SPACE Y","owner":"1","created_at":1665584805211,"removed":false,"_id":"D7TA3Tc4q6Tc7s9m"}
-{"id":"3","def_name":"tracker","on":false,"name":"LEVAVY","owner":"1","created_at":1665660096815,"removed":false,"last_position":{"lat":"0.6598","lon":"0.3870"},"_id":"EokfrnEpsP1apMpL"}
+{"id":"3","def_name":"tracker","on":false,"name":"LEVAVY","owner":"1","created_at":1665660096815,"removed":false,"last_position":{"lat":-25.919488,"lon":32.555008,"time":1665827278663},"_id":"EokfrnEpsP1apMpL"}
 {"id":"2","def_name":"camera","name":"CAM SIDE S","owner":"1","created_at":1665579411175,"removed":false,"_id":"J3Uy8reslnwzbwXP"}
-{"id":"3","def_name":"tracker","on":false,"name":"Vicktor S.V","owner":"1","created_at":1665647009175,"removed":false,"last_position":{"lat":-25.9129344,"lon":32.5681152},"_id":"Lb6bKLG8FLh7k7Xn"}
+{"id":"3","def_name":"tracker","on":false,"name":"nff","owner":"1","created_at":1665670007445,"removed":true,"last_position":{"lat":-25.9162112,"lon":32.5484544},"_id":"KaMhCN3j7ps6EqOP"}
+{"id":"3","def_name":"tracker","on":false,"name":"Vicktor S.V","owner":"1","created_at":1665647009175,"removed":false,"last_position":{"lat":-25.919488,"lon":32.555008,"time":1665827332345},"_id":"Lb6bKLG8FLh7k7Xn"}
 {"id":"2","def_name":"camera","name":"Ala X","owner":"1","created_at":1665587799174,"removed":true,"_id":"Lzdpb38opeNOEGvV"}
 {"id":"1","def_name":"bell","name":"Bell X","owner":"1","created_at":1665579422003,"removed":true,"_id":"PSvEGGEzMTqnHqZr"}
 {"id":"0","def_name":"light","on":false,"name":"Green","owner":"1","created_at":1665582178718,"removed":true,"_id":"X6sDFLMh3amiXqcp"}
@@ -18,9 +19,4 @@
 {"id":"3","def_name":"tracker","on":false,"name":"Kyle Lounder","owner":"1","created_at":1665645955923,"removed":true,"last_position":{"lat":0,"lon":0},"_id":"m3zR5p6eEPwOKxb4"}
 {"id":"2","def_name":"camera","name":"Camera A","owner":"1","created_at":1665575044781,"removed":false,"_id":"nkQtNKM8gOMMPqMT"}
 {"id":"0","def_name":"light","on":false,"name":"Sunshine","owner":"1","created_at":1665581123086,"removed":true,"_id":"ohartZ8xYsTEqFyX"}
-{"id":"3","def_name":"tracker","on":false,"name":"nff","owner":"1","created_at":1665670007445,"removed":false,"last_position":{"lat":0,"lon":0},"_id":"KaMhCN3j7ps6EqOP"}
-{"id":"3","def_name":"tracker","on":false,"name":"nff","owner":"1","created_at":1665670007445,"removed":false,"last_position":{"lat":-25.9162112,"lon":32.5484544},"_id":"KaMhCN3j7ps6EqOP"}
-{"id":"3","def_name":"tracker","on":false,"name":"nff","owner":"1","created_at":1665670007445,"removed":false,"last_position":{"lat":-25.9162112,"lon":32.5484544},"_id":"KaMhCN3j7ps6EqOP"}
-{"id":"3","def_name":"tracker","on":false,"name":"nff","owner":"1","created_at":1665670007445,"removed":true,"last_position":{"lat":-25.9162112,"lon":32.5484544},"_id":"KaMhCN3j7ps6EqOP"}
-{"id":"3","def_name":"tracker","on":false,"name":"nff","owner":"1","created_at":1665670007445,"removed":true,"last_position":{"lat":-25.9162112,"lon":32.5484544},"_id":"KaMhCN3j7ps6EqOP"}
-{"id":"3","def_name":"tracker","on":false,"name":"nff","owner":"1","created_at":1665670007445,"removed":true,"last_position":{"lat":-25.9162112,"lon":32.5484544},"_id":"KaMhCN3j7ps6EqOP"}
+{"id":"3","def_name":"tracker","on":false,"name":"Teste","owner":"1","created_at":1665827357075,"removed":false,"last_position":{"lat":-25.919488,"lon":32.555008,"time":1665827387559},"_id":"qrtRCXPoxkZUn0wa"}

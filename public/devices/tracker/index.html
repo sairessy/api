@@ -11,22 +11,35 @@
       <p>Latitude: <span id="lat">0</span></p>
       <p>Longitude: <span id="lon">0</span></p>
     </main>
-    <script src="../../libraries/js/socket.io.min.js"></script>
+    <script
+      src="https://cdn.socket.io/4.5.3/socket.io.min.js"
+      integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <script src="../../libraries/js/socket.io.min.js"></script> -->
     <script src="../../config.js"></script>
     <script>
       const url = new URL(window.location.href);
       const device_id = url.searchParams.get("id");
       const socket = io(config.api_url);
 
-      setInterval(() => {
+      sendPosition();
+      setInterval(async () => {
+        sendPosition();
+      }, 10000);
+
+      async function sendPosition() {
         try {
-          navigator.geolocation.getCurrentPosition((position) => {
-            const { latitude: lat, longitude: lon } = position.coords;
+          await navigator.geolocation.getCurrentPosition(async (position) => {
+            const { latitude: lat, longitude: lon } = await position.coords;
             const pos = {
               lat,
               lon,
+              time: Date.now(),
               device_id,
             };
+
+            console.log(pos);
 
             document.getElementById("lat").innerText = pos.lat;
             document.getElementById("lon").innerText = pos.lon;
@@ -34,12 +47,13 @@
             socket.emit("devices-tracker-position", pos);
           });
         } catch (error) {
+          console.log("Erro");
           console.log(error);
           alert(
             "Houve um erro certifique-se de estar conectado a internet e permitir a geolocalização!"
           );
         }
-      }, 5000);
+      }
     </script>
   </body>
 </html>
