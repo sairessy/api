@@ -42,6 +42,11 @@ io.on("connection", (socket) => {
     io.emit("devices-tracker-position", data);
   });
 
+  // Strean
+  socket.on("stream", (data) => {
+    io.emit("stream", data);
+  });
+
   // Cameras
   socket.on("devices-camera-img", (data) => {
     io.emit("devices-camera-img", data);

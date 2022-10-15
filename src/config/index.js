@@ -1,4 +1,5 @@
 import Bell from "../models/devices/Bell.js";
+import Camera from "../models/devices/Camera.js";
 import Light from "../models/devices/Light.js";
 import Tracker from "../models/devices/Tracker.js";
 
@@ -16,7 +17,7 @@ const devices = [
   {
     id: "2",
     name: "camera",
-    Device: Bell,
+    Device: Camera,
   },
   {
     id: "3",

@@ -7,7 +7,21 @@
     <title>Camera</title>
   </head>
   <body>
-    <main></main>
+    <canvas
+      style="display: none"
+      id="canvas-main"
+      width="300"
+      height="300"
+    ></canvas>
+    <video
+      style="display: none"
+      src=""
+      id="video"
+      width="300"
+      height="300"
+      controls
+    ></video>
+
     <script src="../../config.js"></script>
     <script src="../../libraries/js/socket.io.min.js"></script>
     <script src="../../libraries/js/p5.js"></script>
@@ -15,26 +29,42 @@
       const url = new URL(window.location.href);
       const device_id = url.searchParams.get("id");
 
+      const video = document.getElementById("video");
+      const canvas = document.getElementById("canvas-main");
+
       let socket;
 
       function setup() {
-        createCanvas(400, 400);
         socket = io(config.api_url);
+        // const canvas = createCanvas(320, 200);
+        try {
+          navigator.mediaDevices
+            .getUserMedia({
+              video: {
+                facingMode: {
+                  ideal: "environment",
+                },
+              },
+              audio: false,
+            })
+            .then((stream) => {
+              video.srcObject = stream;
+              video.play();
+            });
+        } catch (error) {
+          alert(JSON.stringify({ error }));
+        }
       }
 
       function draw() {
-        background(51);
-        frameRate(1);
-        ellipse(random(width), random(height), 100, 100);
+        frameRate(5);
 
-        saveFrames("out", "png", 1, 1, (frames) => {
-          print(frames);
-          socket.emit("devices-camera-img", {
-            img: frames[0],
-            device_id,
-          });
-          // noLoop();
-        });
+        canvas
+          .getContext("2d")
+          .drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const src = canvas.toDataURL("image/jpeg");
+        socket.emit("stream", { src: src, device_id });
       }
     </script>
   </body>

@@ -4,6 +4,9 @@ import Bell from "../../models/devices/Bell.js";
 import Camera from "../../models/devices/Camera.js";
 import Light from "../../models/devices/Light.js";
 import Tracker from "../../models/devices/Tracker.js";
+import api_url from "../../config/api_url.js";
+
+import QRCode from "qrcode";
 
 export const create = async (req, res) => {
   const data = req.body;
@@ -33,8 +36,18 @@ export const create = async (req, res) => {
 export const findByOwner = (req, res) => {
   const owner = req.params.id;
 
-  db.devices.find({ owner, removed: false }, (err, data) => {
-    res.json(data);
+  db.devices.find({ owner, removed: false }, async (err, data) => {
+    const d = data;
+
+    for (let i = 0; i < d.length; i++) {
+      d[i].qr_code = await new Promise(async (resolve) => {
+        const url = `${api_url}/devices/${d[i].def_name}/?id=${d[i]._id}`;
+        const code = await QRCode.toDataURL(url);
+        resolve(code);
+      });
+    }
+
+    res.json(d);
   });
 };
 
