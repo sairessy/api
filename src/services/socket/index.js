@@ -1,16 +1,30 @@
-import io from "../../../index.js";
+import main from "./main/index.js";
+
+import express from "express";
+import cors from "cors";
+import http from "http";
+import { Server } from "socket.io";
+
+const app = express();
+app.use(cors({ origin: "*", allowedHeaders: "*" }));
+const server = http.createServer(app);
+
+app.use(express.json());
+
+app.use("/", main);
+
+// WebSocket
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+  },
+});
 
 io.on("connection", (socket) => {
-  console.log("Client connected!");
-
-  // DEVICES
-  // Bells
-  socket.on("device-bell-play", (data) => {
-    io.emit("device-bell-play", data);
-  });
-
   // Cameras
-  socket.on("device-camera-img", (data) => {
-    io.emit("device-camera-img", data);
+  socket.on("devices-camera-img", (data) => {
+    io.emit("devices-camera-img", data);
   });
 });
+
+export { app, server, io };
