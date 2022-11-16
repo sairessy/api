@@ -8,6 +8,7 @@ export default class Modelo {
     this.address = address || "";
     this.created_at = Date.now();
     this.deactivated = false;
+    this.height = null;
     this.removed = false;
   }
 }

@@ -1,5 +1,26 @@
 import db from "../../database/nedb/modelo/index.js";
 import Photo from "../../models/modelo/Photo.js";
+import Empresa from "../../models/modelo/Empresa.js";
+
+export const criar_empresa = async (req, res) => {
+  const { email, password } = req.body;
+
+  const empresa = new Empresa("", email, password);
+
+  try {
+    db.empresas.findOne({ email }, (err, doc) => {
+      if (doc !== null) {
+        res.status(409).json({ msg: "O email introduzido já foi usado!" });
+      } else {
+        db.empresas.insert(empresa, (err, dc) => {
+          res.json({ data: dc });
+        });
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ msg: "Houve um erro interno" });
+  }
+};
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
@@ -14,12 +35,16 @@ export const login = async (req, res) => {
 };
 
 export const update = async (req, res) => {
-  const { name, contact } = req.body;
+  const { name, contact, empresa } = req.body;
 
   try {
-    db.empresas.update({}, { $set: { contact, name } }, (err, num_replaced) => {
-      res.json({ data: num_replaced });
-    });
+    db.empresas.update(
+      { _id: empresa },
+      { $set: { contact, name } },
+      (err, num_replaced) => {
+        res.json({ data: num_replaced });
+      }
+    );
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });
@@ -27,10 +52,10 @@ export const update = async (req, res) => {
 };
 
 export const info = async (req, res) => {
-  // const { name, contact } = req.body;
+  const _id = req.params.id;
 
   try {
-    db.empresas.findOne({}, (err, doc) => {
+    db.empresas.findOne({ _id }, (err, doc) => {
       res.json({ data: doc });
     });
   } catch (error) {
@@ -67,19 +92,46 @@ export const get_model_photos = (req, res) => {
 
 export const get_all_photos = (req, res) => {
   try {
-    db.photos.find({}, async (err, _data) => {
-      const data = _data;
+    db.photos
+      .find({})
+      .sort({ created_at: -1 })
+      .exec(async (err, _data) => {
+        const data = _data;
 
-      for (let i = 0; i < data.length; i++) {
-        data[i].company = await new Promise((resolve, reject) => {
-          db.empresas.findOne({ _id: data[i].empresa }, (err, doc) => {
-            const { contact, email, name } = doc;
-            resolve({ contact, email, name });
+        for (let i = 0; i < data.length; i++) {
+          data[i].company = await new Promise((resolve, reject) => {
+            db.empresas.findOne({ _id: data[i].empresa }, (err, doc) => {
+              const { contact, email, name, _id: id } = doc;
+              resolve({ contact, email, name, id });
+            });
           });
-        });
-      }
-      res.json(data);
-    });
+        }
+        res.json(data);
+      });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+export const get_all_photos_company = (req, res) => {
+  const id = req.params.company_id;
+  try {
+    db.photos
+      .find({ empresa: id })
+      .sort({ created_at: -1 })
+      .exec(async (err, _data) => {
+        const data = _data;
+
+        for (let i = 0; i < data.length; i++) {
+          data[i].company = await new Promise((resolve, reject) => {
+            db.empresas.findOne({ _id: data[i].empresa }, (err, doc) => {
+              const { contact, email, name, _id: id } = doc;
+              resolve({ contact, email, name, id });
+            });
+          });
+        }
+        res.json(data);
+      });
   } catch (error) {
     res.status(500).json({ error });
   }
