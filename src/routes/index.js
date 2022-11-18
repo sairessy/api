@@ -1,5 +1,5 @@
 import main from "./main/index.js";
-import modelos from "./modelo/index.js";
+import users from "./dev/index.js";
 
 import express from "express";
 import cors from "cors";
@@ -10,10 +10,13 @@ const app = express();
 app.use(cors({ origin: "*", allowedHeaders: "*" }));
 const server = http.createServer(app);
 
+app.use(express.static("public"));
 app.use(express.json({ limit: "3mb" }));
 
+// ROUTES
 app.use("/", main);
-app.use("/modelo", modelos);
+// Dev
+app.use("/dev", users);
 
 // WebSocket
 const io = new Server(server, {
@@ -23,10 +26,9 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  // Cameras
   socket.on("devices-camera-img", (data) => {
     io.emit("devices-camera-img", data);
   });
 });
 
-export { app, server, io };
+export default server;
