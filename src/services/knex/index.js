@@ -3,10 +3,10 @@ import knex from "knex";
 export default knex({
   client: "mysql",
   connection: {
-    host: "127.0.0.1",
+    host: "sql9.freesqldatabase.com",
     port: 3306,
-    user: "root",
-    password: "",
-    database: "main",
+    user: "sql9578857",
+    password: "hbtPDLDtT8",
+    database: "sql9578857",
   },
 });
