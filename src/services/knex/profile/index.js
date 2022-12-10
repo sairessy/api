@@ -8,7 +8,7 @@ const {
   PROFILE_USER,
   PROFILE_PASSWORD,
   PROFILE_DATABASE,
-} = env;
+} = process.env;
 
 export default knex({
   client: "mysql",
