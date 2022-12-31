@@ -5,13 +5,29 @@ import docs from "./profile/docs.js";
 import express from "express";
 import cors from "cors";
 import http from "http";
+import cookieParser from "cookie-parser";
 
 const app = express();
-app.use(cors({ origin: "*", allowedHeaders: "*" }));
-const server = http.createServer(app);
 
+// app.use(
+//   cors({
+//     origin: "*",
+//     allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"],
+//     preflightContinue: true,
+//     methods: ["PUT", "POST", "GET", "DELETE"],
+//     credentials: true,
+//   })
+// );
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use(express.static("public"));
 app.use(express.json({ limit: "3mb" }));
+app.use(cookieParser());
+
+const server = http.createServer(app);
 
 // ROUTES
 // Main

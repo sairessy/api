@@ -1,5 +1,4 @@
 import knex from "knex";
-
 import { env } from "../../../config/index.js";
 
 const {
@@ -8,7 +7,7 @@ const {
   PROFILE_USER,
   PROFILE_PASSWORD,
   PROFILE_DATABASE,
-} = process.env;
+} = env || process.env;
 
 export default knex({
   client: "mysql",

@@ -1,6 +1,5 @@
 import knex from "../../services/knex/profile/index.js";
 import QRCode from "qrcode";
-import { env } from "../../config/index.js";
 
 export const create = async (req, res) => {
   const { email, password } = req.body;
@@ -17,11 +16,11 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
 
   const result = await knex("pfl_user").where({ email, password });
-
   res.json({ data: result });
 };
 
 export const update = async (req, res) => {
+  console.log("updt", req.cookies);
   const { name, surname } = req.body;
   const id = req.params.id;
   const result = await knex("pfl_user").update({ name, surname }).where({ id });
@@ -31,12 +30,15 @@ export const update = async (req, res) => {
 export const private_info = async (req, res) => {
   const id = req.params.id;
   const result = await knex("pfl_user").where({ id }).first();
-  QRCode.toDataURL(`${env.DOCK_APP_BASE_URL}/public/${id}`).then((url) => {
-    res.json({ data: { ...result, url } });
-  });
+  QRCode.toDataURL(`${process.env.PROFILE_BASE_URL}/public/${id}`).then(
+    (url) => {
+      res.json({ data: { ...result, url } });
+    }
+  );
 };
 
 export const public_info = async (req, res) => {
+  console.log("pbcinfo", req.cookies);
   const result = await knex("pfl_document").where({
     id_user: req.params.id,
     private: false,

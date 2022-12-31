@@ -9,6 +9,7 @@ import {
   send_recovery_code,
   update,
 } from "../../controllers/profile/User.js";
+import auth from "../../middleware/main/auth.js";
 
 const router = express.Router();
 

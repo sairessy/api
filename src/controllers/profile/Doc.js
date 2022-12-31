@@ -14,6 +14,7 @@ export const create = async (req, res) => {
 };
 
 export const all = async (req, res) => {
+  console.log("all", req.cookies);
   const id_user = req.params.id;
   const result = await knex("pfl_document")
     .where({ id_user, removed: false })

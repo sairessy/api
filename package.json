@@ -1,7 +1,7 @@
 {
   "name": "api",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "An API to serve amazing things!",
   "main": "index.js",
   "engines": {
     "node": "14.x"
@@ -12,10 +12,9 @@
     "dev": "nodemon index"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "(Victorino, Sairesse) <sairessy@gmail.com>",
+  "license": "MIT",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.12",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
@@ -25,11 +24,8 @@
     "firebase": "^9.14.0",
     "knex": "^2.3.0",
     "mysql": "^2.18.1",
-    "nedb": "^1.8.0",
     "node-fetch": "^3.2.10",
     "nodemailer": "^6.8.0",
-    "passport": "^0.6.0",
-    "passport-local": "^1.0.0",
     "qrcode": "^1.5.1"
   }
 }
