@@ -1,0 +1,37 @@
+{
+  "name": "APIx",
+  "version": "1.0.1",
+  "description": "An API to serve amazing applications!",
+  "main": "index.js",
+  "engines": {
+    "node": "14.x"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "keywords": [],
+  "author": "(Victorino, Sairesse) <sairessy@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "docx-templates": "^4.11.3",
+    "docxtemplater": "^3.37.12",
+    "dotenv": "^16.0.2",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "knex": "^2.3.0",
+    "langchain": "0.0.114",
+    "mysql": "^2.18.1",
+    "nedb": "^1.8.0",
+    "node-fetch": "^3.2.10",
+    "nodemailer": "^6.8.0",
+    "openai": "^3.3.0",
+    "pizzip": "^3.1.4",
+    "qrcode": "^1.5.1",
+    "xlsx": "^0.18.5"
+  }
+}
