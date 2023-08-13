@@ -7,14 +7,10 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// const SERVER = "http://localhost:8000";
-const SERVER = 'https://api.sairessevictori.repl.co';
-
 export const fill_anep_docs = (req, res) => {
   try {
     fs.rm("./static/anep-docs", { recursive: true, force: true }, (e) => {
       fs.mkdir("./static/anep-docs", () => {
-        const data = req.body;
         // Load the templated docx file
         const templateFile = fs.readFileSync(
           path.resolve(__dirname, "../../../static/vis_template.docx"),
@@ -26,10 +22,8 @@ export const fill_anep_docs = (req, res) => {
           // Attempt to read all the templated tags
           let outputDocument = new Docxtemplater(zip);
 
-          const dataToAdd = data;
-
           // Set the data we wish to add to the document
-          outputDocument.setData(dataToAdd);
+          outputDocument.setData(req.body);
 
           try {
             // Attempt to render the document (Add data to the template)
@@ -50,7 +44,7 @@ export const fill_anep_docs = (req, res) => {
             );
 
             res.json({
-              vis: SERVER + "/anep-docs/" + vis,
+              vis: "/anep-docs/" + vis,
             });
           } catch (error) {
             console.error(`ERROR Filling out Template:`);
