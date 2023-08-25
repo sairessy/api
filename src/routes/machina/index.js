@@ -10,5 +10,6 @@ router.get("/", async (req, res) => {
 router.post('/create', create);
 router.get('/:id', find);
 router.post('/remove/:id', remove);
-router.post('/update', update)
+router.post('/update', update);
+
 export default router;

@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   res.json({
-    info: "Welcome to APIx 🖖",
+    info: "Welcome to API 🖖",
   });
 });
 

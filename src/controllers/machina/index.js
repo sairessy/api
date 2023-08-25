@@ -2,17 +2,19 @@ import Machina from "../../models/machina/Machina.js";
 import db from "../../services/nedb/index.js";
 
 export const create = (req, res) => {
-  const machina = new Machina({
-    id: String(Date.now()),
-    ...req.body,
-  });
-
-  db.insert(machina, (err, doc) => {
-    res.json(doc);
-  });
+  db.insert(
+    new Machina({
+      id: String(Date.now()),
+      ...req.body,
+    }),
+    (err, doc) => {
+      res.json(doc);
+    }
+  );
 };
 
 export const find = (req, res) => {
+  db.loadDatabase();
   db.findOne({ id: req.params.id }, (err, doc) => {
     const machina = doc;
     delete machina._id;
