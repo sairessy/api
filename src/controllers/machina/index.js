@@ -1,5 +1,5 @@
 import Machina from "../../models/machina/Machina.js";
-import db from "../../services/nedb/index.js";
+import db from "../../services/nedb/collections/machina/index.js";
 
 export const create = (req, res) => {
   db.insert(
