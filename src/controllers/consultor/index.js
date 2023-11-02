@@ -1,6 +1,3 @@
-import db from "../../services/nedb/collections/user/index.js";
-import {db_consultores} from "../../services/nedb/collections/consultor/index.js";
-
 export const all = (req, res) => {
   db.find({}, (err, _docs) => {
     db_consultores.find({}, (err, consultores) => {

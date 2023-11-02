@@ -9,6 +9,8 @@ const __dirname = path.dirname(__filename);
 
 export const fill_anep_docs = (req, res) => {
   try {
+    // return res.status(409).json({turned_off: true});
+
     fs.rm("./static/anep-docs", { recursive: true, force: true }, (e) => {
       fs.mkdir("./static/anep-docs", () => {
         // Load the templated docx file
