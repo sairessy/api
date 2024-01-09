@@ -1,5 +1,9 @@
 import dotenv from "dotenv";
 
-const env = dotenv.config().parsed;
+import { fileURLToPath } from 'url';
+import path from 'path';
 
-export { env };
+const __filename = fileURLToPath(import.meta.url);
+
+export const env = dotenv.config().parsed;
+export const __dirname = path.dirname(__filename);
