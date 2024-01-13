@@ -3,9 +3,9 @@ import express from "express";
 import cors from "cors";
 import http from "http";
 import cookieParser from "cookie-parser";
-import { Server } from "socket.io";
+// import { Server } from "socket.io";
 
-import IoMain from "../controllers/io/index.js";
+// import IoMain from "../controllers/io/index.js";
 
 // IMPORT ROUTES
 import main from "./main/index.js";
@@ -22,9 +22,9 @@ app.use(cors({ origin: "*" }));
 app.use(express.json({ limit: "3mb" }));
 app.use(express.static("static"));
 const server = http.createServer(app);
-const io = new Server(server, { cors: { origin: "*" } });
+//const io = new Server(server, { cors: { origin: "*" } });
 
-io.sockets.on("connection", new IoMain().on_connection);
+// io.sockets.on("connection", new IoMain().on_connection);
 
 // USE ROUTES
 app.use("/", main);
