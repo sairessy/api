@@ -4,14 +4,8 @@ const db = {
   user: {
     users: new Datastore("./src/services/nedb/collections/user/users.db"),
   },
-  machina: {
-    machinas: new Datastore("./src/services/nedb/collections/machina/machinas.db"),
-  },
-  general: {
-    data: new Datastore("./src/services/nedb/collections/general/data.db"),
-  },
-  foco_cadastro: {
-    estudantes: new Datastore("./src/services/nedb/collections/foco-cadastro/estudantes.db"),
+  log: {
+    logs: new Datastore('./src/services/nedb/collections/log/logs.db')
   }
 };
 
