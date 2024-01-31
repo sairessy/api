@@ -1,5 +1,6 @@
 import server from "./src/routes/index.js";
 
-server.listen(process.env.PORT || 3000, () => {
-  console.log("Api working just fine!");
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`[✓] API running on port ${PORT}`);
 });

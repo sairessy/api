@@ -7,6 +7,6 @@ router.get("/", async (req, res) => {
   res.json({ info: "Welcome to automata 👌!" });
 });
 
-router.post("/anep-docs/", fill_anep_docs)
+router.post("/anep-docs/", fill_anep_docs);
 
 export default router;

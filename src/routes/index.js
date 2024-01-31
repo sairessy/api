@@ -10,10 +10,7 @@ import cookieParser from "cookie-parser";
 // IMPORT ROUTES
 import main from "./main/index.js";
 import automata from "./automata/index.js";
-import machina from "./machina/index.js";
 import user from "./user/index.js";
-import consultor from "./consultor/index.js";
-import foco_cadastro from './foco-cadastro/index.js';
 
 // EXPRESS
 const app = express();
@@ -30,8 +27,5 @@ const server = http.createServer(app);
 app.use("/", main);
 app.use("/user", user);
 app.use("/automata", automata);
-app.use("/machina", machina);
-app.use("/consultor", consultor);
-app.use('/foco-cadastro', foco_cadastro);
 
 export default server;

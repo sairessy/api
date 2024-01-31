@@ -2,7 +2,9 @@ import fs from "fs";
 import path from "path";
 import PizZip from "pizzip";
 import Docxtemplater from "docxtemplater";
-import { fileURLToPath } from "url";
+import {
+  fileURLToPath
+} from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -11,7 +13,9 @@ export const fill_anep_docs = (req, res) => {
   try {
     // return res.status(409).json({turned_off: true});
 
-    fs.rm("./static/anep-docs", { recursive: true, force: true }, (e) => {
+    fs.rm("./static/anep-docs", {
+      recursive: true, force: true
+    }, (e) => {
       fs.mkdir("./static/anep-docs", () => {
         // Load the templated docx file
         const templateFile = fs.readFileSync(
@@ -33,8 +37,10 @@ export const fill_anep_docs = (req, res) => {
 
             // Create a buffer to store the output data
             let outputDocumentBuffer = outputDocument
-              .getZip()
-              .generate({ type: "nodebuffer" });
+            .getZip()
+            .generate({
+              type: "nodebuffer"
+            });
 
             // Save the buffer to a file
             const f_name = String(Date.now());
@@ -62,3 +68,4 @@ export const fill_anep_docs = (req, res) => {
     console.log(error);
   }
 };
+
