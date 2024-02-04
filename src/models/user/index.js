@@ -5,6 +5,7 @@ class User {
     this.recovery_code = String(Math.random()).substring(2, 7);
     this.created_at = Date.now();
     this.app = '';
+    author: ''
   }
 }
 

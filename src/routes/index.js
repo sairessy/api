@@ -11,6 +11,7 @@ import cookieParser from "cookie-parser";
 import main from "./main/index.js";
 import automata from "./automata/index.js";
 import user from "./user/index.js";
+import feedback from "./feedback/index.js";
 
 // EXPRESS
 const app = express();
@@ -27,5 +28,6 @@ const server = http.createServer(app);
 app.use("/", main);
 app.use("/user", user);
 app.use("/automata", automata);
+app.use('/feedback', feedback);
 
 export default server;

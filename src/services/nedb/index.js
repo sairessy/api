@@ -6,6 +6,9 @@ const db = {
   },
   log: {
     logs: new Datastore('./src/services/nedb/collections/log/logs.db')
+  },
+  feedback: {
+    feedbacks: new Datastore('./src/services/nedb/collections/feedback/feedbacks.db')
   }
 };
 
