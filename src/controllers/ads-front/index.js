@@ -1,12 +1,12 @@
 import db from '../../services/nedb/index.js';
 
 export const home = (req, res) => {
-  res.json({info: 'Welcome to feedback!'});
+  res.json({info: 'Welcome to ads-front!'});
 }
 
 export const create = async (req, res) => {
-  const fb = req.body;
-  db.feedback.feedbacks.insert(fb, (err, doc) => {
+  const data = req.body;
+  db.feedback.feedbacks.insert(data, (err, doc) => {
     res.json(doc);
   });
 }
@@ -16,3 +16,5 @@ export const all = async (req, res) => {
     res.json(data);
   });
 }
+
+export const remove = (req, res) => {};

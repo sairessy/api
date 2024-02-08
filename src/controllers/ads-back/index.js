@@ -1,7 +1,7 @@
 import db from '../../services/nedb/index.js';
 
 export const home = (req, res) => {
-  res.json({info: 'Welcome to feedback!'});
+  res.json({info: 'Welcome to ads-back!'});
 }
 
 export const create = async (req, res) => {
