@@ -17,7 +17,7 @@ export const create = async (req, res) => {
 export const login = async (req, res) => {
   const { email, pass } = req.body;
   try {
-    db.findOne({ email, pass }, (err, doc) => {
+    db.user.users.findOne({ email, pass }, (err, doc) => {
       if (doc === null) {
         res
           .status(409)
@@ -38,3 +38,16 @@ export const all = (req, res) => {
     );
   });
 };
+
+export const sendRecoveryCode = async (req, res) => {
+  const email = req.body.email;
+  db.user.users.findOne({email}, (err, doc) => {
+    if(!doc) {
+      res.json({info: 'O email não existe!'})
+    } else {
+      // send recovery code to email
+      db.user.users.update({email}, {$set: {recovery_code: String(Math.random()).substring(2, 7)}})
+      res.json({success: true})
+    }
+  })
+}
