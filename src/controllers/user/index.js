@@ -3,7 +3,8 @@ import db from '../../services/nedb/index.js';
 
 export const create = async (req, res) => {
   const { email, pass } = req.body;
-
+  db.user.users.findOne({email}, (err, doc) => {
+  if (doc === null) {
   try {
     db.user.users.insert(new User(email, pass), (err, doc) => {
       delete doc.pass;
@@ -12,7 +13,11 @@ export const create = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error });
   }
-};
+  } else {
+    res.status(500).json({msg: 'O email já foi usado'});
+  }
+});
+}
 
 export const login = async (req, res) => {
   const { email, pass } = req.body;

@@ -9,6 +9,9 @@ const db = {
   },
   feedback: {
     feedbacks: new Datastore('./src/services/nedb/collections/feedback/feedbacks.db')
+  },
+  machina: {
+    machinas: new Datastore('./src/services/nedb/collections/machina/machinas.db')
   }
 };
 
