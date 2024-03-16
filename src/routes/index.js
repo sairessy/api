@@ -13,6 +13,7 @@ import ads_back from "./ads-back/index.js";
 import work from "./work/index.js";
 import gestor from "./gestor/index.js";
 import machina from './machina/index.js';
+import notify from './notify/index.js';
 
 // EXPRESS CONFIG.
 const app = express();
@@ -32,5 +33,6 @@ app.use('/ads-back', ads_back);
 app.use('/work', work);
 app.use('/gestor', gestor);
 app.use('/machina', machina);
+app.use('/notify', notify);
 
 export default server;

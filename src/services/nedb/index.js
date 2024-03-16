@@ -12,6 +12,12 @@ const db = {
   },
   machina: {
     machinas: new Datastore('./src/services/nedb/collections/machina/machinas.db')
+  },
+  gestor: {
+    // sales
+    sales: new Datastore('./src/services/nedb/collections/gestor/sales/sales.db'),
+    sales_category: new Datastore('./src/services/nedb/collections/gestor/sales/sales_category.db'),
+    sales_products: new Datastore('./src/services/nedb/collections/gestor/sales/products.db')
   }
 };
 
