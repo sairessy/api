@@ -13,6 +13,6 @@ server.listen(PORT, async () => {
 
 
 //	cron.schedule('* * * * *', task); ever min
-cron.schedule('10 17 * * *', task);
+cron.schedule('30 17 * * *', task);
 
 });
