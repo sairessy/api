@@ -1,12 +1,14 @@
 import XLSX from 'xlsx';
 import path from 'path';
 import { __dirname } from '../../config/index.js';
+import {env} from '../../config/index.js';
 
 export const home = (req, res) => {
 	const auth = req.headers.authorization;
 	console.log(auth);
   res.json({
     info: "Welcome to our API 🖖",
+    envi: env
   });
 };
 
