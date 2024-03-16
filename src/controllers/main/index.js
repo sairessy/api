@@ -8,7 +8,6 @@ export const home = (req, res) => {
 	console.log(auth);
   res.json({
     info: "Welcome to our API 🖖",
-    envi: env
   });
 };
 
