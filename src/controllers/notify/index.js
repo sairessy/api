@@ -4,7 +4,7 @@ export const send = (req, res) => {
 	const user = req.headers.user;
 	const {to, subject, text} = req.body;
 	try {
-	  sendMail(to, subject, text);
+	  await sendMail(to, subject, text);
 		res.json({sucess: true, data: req.body});
 	} catch (err) {
 	  res.status(409).json({sucess: false, error: err})
