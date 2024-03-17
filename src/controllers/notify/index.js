@@ -1,6 +1,6 @@
 import sendMail from '../../services/nodemailer/send_mail.js';
 
-export const send = (req, res) => {
+export const send = async (req, res) => {
 	const user = req.headers.user;
 	const {to, subject, text} = req.body;
 	try {
