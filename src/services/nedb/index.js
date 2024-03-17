@@ -18,6 +18,10 @@ const db = {
     sales: new Datastore('./src/services/nedb/collections/gestor/sales/sales.db'),
     sales_category: new Datastore('./src/services/nedb/collections/gestor/sales/sales_category.db'),
     sales_products: new Datastore('./src/services/nedb/collections/gestor/sales/products.db')
+  },
+  notify: {
+    clients: new Datastore('./src/services/nedb/collections/notify/clients.db'),
+    clients_cat:  new Datastore('./src/services/nedb/collections/notify/clients_cat.db')
   }
 };
 

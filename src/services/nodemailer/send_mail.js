@@ -9,7 +9,6 @@ const sendMail = async (to, subject, text, html = "") => {
       console.log('Error occurred:', error);
     } else {
       console.log('Email sent:', info.response);
-	    return info;
     }
   });
 }
