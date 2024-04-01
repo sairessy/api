@@ -1,5 +1,6 @@
 import User from "../../models/user/index.js";
 import db from '../../services/nedb/index.js';
+import sendMail from '../../services/nodemailer/send_mail.js';
 
 export const create = async (req, res) => {
   const { email, pass } = req.body;
@@ -44,15 +45,31 @@ export const all = (req, res) => {
   });
 };
 
+export const user = async (req, res) => {
+  const _id = req.params.id;
+  db.user.users.findOne({_id}, (err, doc) => {
+    if(doc != null) {
+      delete doc.pass;
+    }
+    res.json({data: doc});
+  });
+};
+
 export const sendRecoveryCode = async (req, res) => {
   const email = req.body.email;
   db.user.users.findOne({email}, (err, doc) => {
     if(!doc) {
       res.json({info: 'O email não existe!'})
     } else {
-      // send recovery code to email
-      db.user.users.update({email}, {$set: {recovery_code: String(Math.random()).substring(2, 7)}})
+     sendMail(email, 'Código de recuperação', doc.recovery_code);
+      
+      db.user.users.update({email}, {
+        $set: {
+          recovery_code: String(Math.random()).substring(2, 7)
+        }
+      });
+      
       res.json({success: true})
     }
-  })
+  });
 }

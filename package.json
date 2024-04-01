@@ -31,6 +31,7 @@
     "nedb": "^1.8.0",
     "node-cron": "^3.0.3",
     "node-fetch": "^3.2.10",
+    "node-nlp": "^4.27.0",
     "nodemailer": "^6.8.0",
     "openai": "^3.3.0",
     "pizzip": "^3.1.4",

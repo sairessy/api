@@ -22,6 +22,15 @@ const db = {
   notify: {
     clients: new Datastore('./src/services/nedb/collections/notify/clients.db'),
     clients_cat:  new Datastore('./src/services/nedb/collections/notify/clients_cat.db')
+  },
+  tecnico: {
+    tecnicos: new Datastore('./src/services/nedb/collections/tecnico/tecnicos.db'),
+  },
+  exchange: {
+    products: new Datastore('./src/services/nedb/collections/exchange/products.db'),
+  },
+  truck: {
+    transportations: new Datastore('./src/services/nedb/collections/transportation/transportations.db'),
   }
 };
 

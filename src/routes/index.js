@@ -14,6 +14,9 @@ import work from "./work/index.js";
 import gestor from "./gestor/index.js";
 import machina from './machina/index.js';
 import notify from './notify/index.js';
+import tecnico from './tecnico/index.js';
+import truck from './truck/index.js';
+import chatbot from './chatbot/index.js';
 
 // EXPRESS CONFIG.
 const app = express();
@@ -34,5 +37,8 @@ app.use('/work', work);
 app.use('/gestor', gestor);
 app.use('/machina', machina);
 app.use('/notify', notify);
+app.use('/tecnico', tecnico);
+app.use('/truck', truck);
+app.use('/chatbot', chatbot);
 
 export default server;
