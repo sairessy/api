@@ -35,29 +35,29 @@
           "useStemDict": true
         },
         "stemDict": {
-          "cours": {
-            "intent": "courses.show",
+          "curso": {
+            "intent": "mostra.cursos",
             "domain": "default"
           },
-          "durat": {
-            "intent": "courses.duration",
+          "dura,duracao": {
+            "intent": "mostra.duracao",
             "domain": "default"
           }
         },
         "intentDict": {
-          "courses.show": "default",
-          "courses.duration": "default"
+          "mostra.cursos": "default",
+          "mostra.duracao": "default"
         },
         "sentences": [
           {
             "domain": "default",
-            "utterance": "courses",
-            "intent": "courses.show"
+            "utterance": "cursos",
+            "intent": "mostra.cursos"
           },
           {
             "domain": "default",
-            "utterance": "duration",
-            "intent": "courses.duration"
+            "utterance": "dura duracao",
+            "intent": "mostra.duracao"
           }
         ],
         "domains": {
@@ -74,27 +74,32 @@
               "log": true
             },
             "features": {
-              "cours": 1,
-              "durat": 1
+              "curso": 1,
+              "dura": 1,
+              "duracao": 1
             },
             "intents": {
-              "courses.show": 1,
-              "courses.duration": 1
+              "mostra.cursos": 1,
+              "mostra.duracao": 1
             },
             "intentFeatures": {
-              "courses.show": {
-                "cours": 1
+              "mostra.cursos": {
+                "curso": 1
               },
-              "courses.duration": {
-                "durat": 1
+              "mostra.duracao": {
+                "dura": 1,
+                "duracao": 1
               }
             },
             "featuresToIntent": {
-              "cours": [
-                "courses.show"
+              "curso": [
+                "mostra.cursos"
               ],
-              "durat": [
-                "courses.duration"
+              "dura": [
+                "mostra.duracao"
+              ],
+              "duracao": [
+                "mostra.duracao"
               ]
             },
             "neuralNetwork": {
@@ -110,23 +115,26 @@
                 "log": true
               },
               "features": [
-                "cours",
-                "durat"
+                "curso",
+                "dura",
+                "duracao"
               ],
               "intents": [
-                "courses.show",
-                "courses.duration"
+                "mostra.cursos",
+                "mostra.duracao"
               ],
               "perceptrons": [
                 [
-                  10.62476634979248,
-                  -3.4869275093078613,
-                  3.569221390559939
+                  10.087417602539062,
+                  -2.0022268295288086,
+                  -2.0022268295288086,
+                  4.047994996386096
                 ],
                 [
-                  -3.4782614707946777,
-                  10.6246337890625,
-                  3.5730609599232563
+                  -1.9969865083694458,
+                  6.107981204986572,
+                  6.107981204986572,
+                  2.0534609569587534
                 ]
               ]
             }
@@ -138,11 +146,11 @@
     "extraSentences": [
       [
         "en",
-        "courses"
+        "cursos"
       ],
       [
         "en",
-        "duration"
+        "dura duracao"
       ]
     ]
   },
@@ -160,14 +168,14 @@
     },
     "responses": {
       "en": {
-        "courses.show": [
+        "mostra.cursos": [
           {
-            "answer": "A Nossa instituicao oferece os seguintes cursos: CA, MI, GG, GRH, EI, ADU, EDINF e CC"
+            "answer": "CA, GG"
           }
         ],
-        "courses.duration": [
+        "mostra.duracao": [
           {
-            "answer": "Todos os nossos cursos tem a duracao de 3 anos, com excessao do curso de EINF que tem uma duracao de 3 meses"
+            "answer": "Todos cursos duram 3 anos, com excessao de EINF, que dura um ano."
           }
         ]
       }
