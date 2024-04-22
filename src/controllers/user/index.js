@@ -1,29 +1,20 @@
 import User from "../../models/user/index.js";
-import db from '../../services/nedb/index.js';
-import sendMail from '../../services/nodemailer/send_mail.js';
+import db from "../../services/nedb/index.js";
+import sendMail from "../../services/nodemailer/send_mail.js";
 
 export const create = async (req, res) => {
-  const { email, pass } = req.body;
-  db.user.users.findOne({email}, (err, doc) => {
-  if (doc === null) {
-  try {
-    db.user.users.insert(new User(email, pass), (err, doc) => {
-      delete doc.pass;
-      res.status(200).json(doc);
-    });
-  } catch (error) {
-    res.status(500).json({ error });
-  }
-  } else {
-    res.status(500).json({msg: 'O email já foi usado'});
-  }
-});
-}
+  const { email, pass, app } = req.body;
+
+  db.user.users.insert(new User(email, pass, app), (err, doc) => {
+    delete doc.pass;
+    res.status(200).json(doc);
+  });
+};
 
 export const login = async (req, res) => {
-  const { email, pass } = req.body;
+  const { email, pass, app } = req.body;
   try {
-    db.user.users.findOne({ email, pass }, (err, doc) => {
+    db.user.users.findOne({ email, pass, app }, (err, doc) => {
       if (doc === null) {
         res
           .status(409)
@@ -33,6 +24,7 @@ export const login = async (req, res) => {
       }
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error });
   }
 };
@@ -47,29 +39,68 @@ export const all = (req, res) => {
 
 export const user = async (req, res) => {
   const _id = req.params.id;
-  db.user.users.findOne({_id}, (err, doc) => {
-    if(doc != null) {
+  db.user.users.findOne({ _id }, (err, doc) => {
+    if (doc != null) {
       delete doc.pass;
     }
-    res.json({data: doc});
+    res.json({ data: doc });
+  });
+};
+
+export const sendConfirmationCode = async (req, res) => {
+  const { email, app } = req.body;
+  db.user.users.findOne({ email, app }, (err, doc) => {
+    if (doc === null) {
+      const code = String(Math.random()).substring(2, 7);
+      console.log(code);
+      sendMail(email, app, "Codigo de confirmação: " + code);
+      res.json({ msg: "Enviamos o código de confirmação para " + email, code });
+    } else {
+      res
+        .status(409)
+        .json({ msg: "Este email já foi usado, opte em recuperá-lo." });
+    }
   });
 };
 
 export const sendRecoveryCode = async (req, res) => {
   const email = req.body.email;
-  db.user.users.findOne({email}, (err, doc) => {
-    if(!doc) {
-      res.json({info: 'O email não existe!'})
+  db.user.users.findOne({ email }, (err, doc) => {
+    if (!doc) {
+      res.status(409).json({ info: "O email não existe!" });
     } else {
-     sendMail(email, 'Código de recuperação', doc.recovery_code);
-      
-      db.user.users.update({email}, {
-        $set: {
-          recovery_code: String(Math.random()).substring(2, 7)
+      sendMail(email, "Loady", "Código de recuperação:" + doc.recovery_code);
+
+      db.user.users.update(
+        { email },
+        {
+          $set: {
+            recovery_code: String(Math.random()).substring(2, 7),
+          },
         }
-      });
-      
-      res.json({success: true})
+      );
+
+      res.json({ success: true });
     }
   });
-}
+};
+
+export const changePass = async (req, res) => {
+  const { email, pass, code, app } = req.body;
+
+  db.user.users.update(
+    { email, recovery_code: code },
+    {
+      $set: { recovery_code: code, email, pass, app },
+    },
+    (err, num) => {
+      if (num === 0) {
+        res
+          .status(409)
+          .json({ msg: "O código introduzido é incorrecto, tente novamente." });
+      } else {
+        res.json({ msg: "Senha alterada com successo." });
+      }
+    }
+  );
+};
