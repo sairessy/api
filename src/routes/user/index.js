@@ -7,6 +7,8 @@ import {
   user,
   changePass,
   sendConfirmationCode,
+  update,
+  byApp,
 } from "../../controllers/user/index.js";
 
 const router = express.Router();
@@ -18,5 +20,7 @@ router.get("/:id", user);
 router.post("/send-recovery-code", sendRecoveryCode);
 router.post("/send-confirmation-code", sendConfirmationCode);
 router.post("/change-pass", changePass);
+router.post("/update", update);
+router.get("/app/:appId", byApp);
 
 export default router;

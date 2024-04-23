@@ -1,10 +1,11 @@
 import express from "express";
 import {
-  home
+  home, sendRequest
 } from "../../controllers/truck/index.js";
 
 const router = express.Router();
 
 router.get("/", home);
+router.post('/send-request', sendRequest)
 
 export default router;

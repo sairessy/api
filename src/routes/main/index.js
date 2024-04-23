@@ -2,7 +2,8 @@ import express from "express";
 import {
   getDistritos,
   getBairros,
-  home
+  home,
+  bairros
 } from "../../controllers/main/index.js";
 import log from '../../middleware/main/log.js';
 import sendMail from '../../services/nodemailer/send_mail.js';
@@ -16,6 +17,6 @@ router.get("/cron", async (req, res) => {
 });
 router.get("/maputo/bairros/:distrito", log, getBairros);
 router.get("/maputo/distritos", log, getDistritos);
-
+router.get('/maputo/bairros', bairros)
 
 export default router;

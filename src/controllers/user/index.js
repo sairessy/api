@@ -13,6 +13,7 @@ export const create = async (req, res) => {
 
 export const login = async (req, res) => {
   const { email, pass, app } = req.body;
+  console.log(email, pass, app)
   try {
     db.user.users.findOne({ email, pass, app }, (err, doc) => {
       if (doc === null) {
@@ -31,9 +32,15 @@ export const login = async (req, res) => {
 
 export const all = (req, res) => {
   db.user.users.find({}, (err, docs) => {
-    res.json(
-      docs.map(({ _id, created_at, email }) => ({ id: _id, created_at, email }))
-    );
+    const users = docs.map((doc) => ({ ...doc, pass: null }));
+    res.json(users);
+  });
+};
+
+export const byApp = (req, res) => {
+  db.user.users.find({app: req.params.appId}, (err, docs) => {
+    const users = docs.map((doc) => ({ ...doc, pass: null }));
+    res.json(users);
   });
 };
 
@@ -43,7 +50,7 @@ export const user = async (req, res) => {
     if (doc != null) {
       delete doc.pass;
     }
-    res.json({ data: doc });
+    res.json(doc);
   });
 };
 
@@ -101,6 +108,18 @@ export const changePass = async (req, res) => {
       } else {
         res.json({ msg: "Senha alterada com successo." });
       }
+    }
+  );
+};
+
+export const update = async (req, res) => {
+  const { surname, name, tel, bairro, area, desc } = req.body;
+  const _id = req.body.user;
+  db.user.users.update(
+    { _id },
+    { $set: { surname, name, tel, bairro, area, desc } },
+    (err, num) => {
+      res.json({});
     }
   );
 };
