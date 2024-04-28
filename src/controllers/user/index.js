@@ -13,7 +13,6 @@ export const create = async (req, res) => {
 
 export const login = async (req, res) => {
   const { email, pass, app } = req.body;
-  console.log(email, pass, app)
   try {
     db.user.users.findOne({ email, pass, app }, (err, doc) => {
       if (doc === null) {
@@ -72,11 +71,12 @@ export const sendConfirmationCode = async (req, res) => {
 
 export const sendRecoveryCode = async (req, res) => {
   const email = req.body.email;
+  const app = req.headers.app || 'greenlight';
   db.user.users.findOne({ email }, (err, doc) => {
     if (!doc) {
       res.status(409).json({ info: "O email não existe!" });
     } else {
-      sendMail(email, "Loady", "Código de recuperação:" + doc.recovery_code);
+      sendMail(email, app, "Código de recuperação:" + doc.recovery_code);
 
       db.user.users.update(
         { email },
