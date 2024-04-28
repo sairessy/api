@@ -25,6 +25,7 @@ const db = {
   },
   tecnico: {
     tecnicos: new Datastore('./src/services/nedb/collections/tecnico/tecnicos.db'),
+    consultas: new Datastore('./src/services/nedb/collections/tecnico/consultas.db'),
   },
   exchange: {
     products: new Datastore('./src/services/nedb/collections/exchange/products.db'),
