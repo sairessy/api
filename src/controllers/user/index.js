@@ -77,12 +77,13 @@ export const sendRecoveryCode = async (req, res) => {
       res.status(409).json({ info: "O email não existe!" });
     } else {
       sendMail(email, app, "Código de recuperação:" + doc.recovery_code);
-
+      const code = String(Math.random()).substring(2, 7);
+      console.log(code);
       db.user.users.update(
         { email },
         {
           $set: {
-            recovery_code: String(Math.random()).substring(2, 7),
+            recovery_code: code
           },
         }
       );
