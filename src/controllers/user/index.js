@@ -32,7 +32,7 @@ export const login = async (req, res) => {
 export const all = (req, res) => {
   db.user.users.find({}, (err, docs) => {
     const users = docs.map((doc) => ({ ...doc, pass: null }));
-    res.json(users);
+    res.json(docs);
   });
 };
 
