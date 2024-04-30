@@ -25,9 +25,9 @@ export const update = async (req, res) => {
 
 export const consulta = (req, res) => {
   const { area, desc, bairro, tel } = req.body;
-  db.user.users.find({ area }, (err, data) => {
+  db.user.users.find({ area: area.id }, (err, data) => {
     const emails = data.map(({ email }) => email);
-    const msg = `Procura-se um consultor de ${area.label}\n Descrição: ${desc}\n Bairro: ${bairro.label}\n Contacto: ${tel}`;
+    const msg = `Procura-se um consultor de ${area.label}\n Descrição: ${desc}\n Bairro: ${bairro.label}\n Contacto: ${tel}\n WhatsApp: https://wa.me/+258${tel}`;
     sendMail(emails, "Consultor 🎓", msg);
     res.json({});
   });

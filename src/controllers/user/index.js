@@ -14,7 +14,7 @@ export const create = async (req, res) => {
 export const login = async (req, res) => {
   const { email, pass, app } = req.body;
   try {
-    db.user.users.findOne({ email, pass }, (err, doc) => {
+    db.user.users.findOne({ email, pass, app }, (err, doc) => {
       if (doc === null) {
         res
           .status(409)
@@ -78,7 +78,8 @@ export const sendRecoveryCode = async (req, res) => {
     } else {
       const code = String(Math.random()).substring(2, 7);
       sendMail(email, app, "Código de recuperação:" + code);
-      console.log(code);
+      console.log("======================")
+      console.log(code, email, app);
       db.user.users.update(
         { email },
         {
