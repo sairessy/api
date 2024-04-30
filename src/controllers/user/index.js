@@ -71,13 +71,13 @@ export const sendConfirmationCode = async (req, res) => {
 
 export const sendRecoveryCode = async (req, res) => {
   const email = req.body.email;
-  const app = req.headers.app || 'greenlight';
+  const app = 'consultor';
   db.user.users.findOne({ email }, (err, doc) => {
     if (!doc) {
       res.status(409).json({ info: "O email não existe!" });
     } else {
-      sendMail(email, app, "Código de recuperação:" + doc.recovery_code);
       const code = String(Math.random()).substring(2, 7);
+      sendMail(email, app, "Código de recuperação:" + code);
       console.log(code);
       db.user.users.update(
         { email },
