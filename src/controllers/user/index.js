@@ -99,7 +99,7 @@ export const changePass = async (req, res) => {
   db.user.users.update(
     { email, recovery_code: code },
     {
-      $set: { recovery_code: code, email, pass, app },
+      $set: {  pass, app },
     },
     (err, num) => {
       if (num === 0) {
