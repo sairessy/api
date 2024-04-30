@@ -14,7 +14,7 @@ export const create = async (req, res) => {
 export const login = async (req, res) => {
   const { email, pass, app } = req.body;
   try {
-    db.user.users.findOne({ email, pass, app }, (err, doc) => {
+    db.user.users.findOne({ email, pass }, (err, doc) => {
       if (doc === null) {
         res
           .status(409)
