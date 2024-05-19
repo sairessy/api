@@ -1,5 +1,3 @@
 {"email":"x@x.com","pass":"x","recovery_code":"25312","created_at":1714492814844,"app":"consultor","_id":"6bucsWPX0i1Oxsjl","surname":"Xavier","name":"Xaves","tel":"87237874","bairro":null,"area":"engel","desc":""}
-{"email":"sairessy@gmail.com","pass":"12","recovery_code":"48669","created_at":1714492119877,"app":"consultor","_id":"xInYdzfKq1nk97M3","surname":"Victorino","name":"Sairesse","tel":"872081978","bairro":null,"area":"math","desc":""}
-{"email":"sairessy@gmail.com","pass":"12","recovery_code":"48669","created_at":1714492119877,"app":"consultor","_id":"xInYdzfKq1nk97M3","surname":"Victorino","name":"Sairesse","tel":"872081978","bairro":2,"area":"math","desc":""}
-{"email":"v@v.com","pass":"v","recovery_code":"84949","created_at":1714495511071,"app":"consultor","_id":"V79fMfa1GncYFf5w"}
 {"email":"v@v.com","pass":"v","recovery_code":"84949","created_at":1714495511071,"app":"consultor","_id":"V79fMfa1GncYFf5w","surname":"Volter","name":"Valter","tel":"87237874","bairro":10,"area":"engmec","desc":""}
+{"email":"sairessy@gmail.com","pass":"12","recovery_code":"48669","created_at":1714492119877,"app":"consultor","_id":"xInYdzfKq1nk97M3","surname":"Victorino","name":"Sairesse","tel":"872081978","bairro":2,"area":"math","desc":""}

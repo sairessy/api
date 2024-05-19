@@ -12,7 +12,7 @@ export const update = (req, res) => {
   const _id = req.params.id
   const data = req.body
   db.machina.machinas.update({_id}, {$set: data}, (err, num) => {
-    res.json({sucess: num > 0});
+    res.json({sucess: num > 0, new_data: data});
   })
 }
 
