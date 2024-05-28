@@ -1,56 +1,52 @@
-import User from "../../models/user/index.js";
+import { User } from "../../services/mongoose/index.js";
 import db from "../../services/nedb/index.js";
 import sendMail from "../../services/nodemailer/send_mail.js";
 
 export const create = async (req, res) => {
-  const { email, pass, app } = req.body;
-
-  db.user.users.insert(new User(email, pass, app), (err, doc) => {
-    delete doc.pass;
-    res.status(200).json(doc);
-  });
+  const { email, pass, app: app_id } = req.body;
+  
+  const doc = await (new User({email, pass, app_id})).save();
+  res.status(200).json(doc);
 };
 
 export const login = async (req, res) => {
-  const { email, pass, app } = req.body;
+  const { email, pass, app = null } = req.body;
   try {
-    db.user.users.findOne({ email, pass, app }, (err, doc) => {
-      if (doc === null) {
+    const users = await User.find({email, pass, app_id: app})
+      if (users.length === 0) {
         res
           .status(409)
           .json({ success: false, msg: "Credenciais incorrectas!" });
       } else {
-        return res.json({ success: true, user: doc._id });
+        return res.json({ success: true, user: users[0]._id });
       }
-    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });
   }
 };
 
-export const all = (req, res) => {
-  db.user.users.find({}, (err, docs) => {
-    const users = docs.map((doc) => ({ ...doc, pass: null }));
-    res.json(docs);
-  });
+export const all = async (req, res) => {
+  const docs = await User.find();
+  const users = docs.map((doc) => ({ ...doc, pass: null }));
+  res.json(docs);
 };
 
-export const byApp = (req, res) => {
-  db.user.users.find({app: req.params.appId}, (err, docs) => {
-    const users = docs.map((doc) => ({ ...doc, pass: null }));
-    res.json(users);
-  });
+export const byApp = async (req, res) => {
+  const docs = await User.find({app_id: req.params.appId});
+  const users = docs.map((doc) => ({ ...doc, pass: null }));
+  res.json(users);
 };
 
 export const user = async (req, res) => {
   const _id = req.params.id;
-  db.user.users.findOne({ _id }, (err, doc) => {
-    if (doc != null) {
-      delete doc.pass;
-    }
-    res.json(doc);
-  });
+  const docs = await User.find({ _id });
+  let doc = {};
+  if (docs.length !== 0) {
+    doc = docs[0];
+    delete doc.pass;
+  }
+  res.json(doc);
 };
 
 export const sendConfirmationCode = async (req, res) => {
