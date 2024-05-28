@@ -115,11 +115,11 @@ export const changePass = async (req, res) => {
 };
 
 export const update = async (req, res) => {
-  const { surname, name, tel, bairro, area, desc } = req.body;
+  //const { surname, name, tel, bairro, area, desc } = req.body;
   const _id = req.headers.user;
   db.user.users.update(
     { _id },
-    { $set: { surname, name, tel, bairro, area, desc } },
+    { $set: req.body },
     (err, num) => {
       res.json({});
     }

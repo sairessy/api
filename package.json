@@ -1,7 +1,7 @@
 {
   "name": "api",
   "version": "1.0.2",
-  "description": "An API to serve amazing applications.",
+  "description": "An abstract API",
   "main": "index.js",
   "engines": {
     "node": ">=14.17.6"
@@ -11,8 +11,11 @@
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "keywords": ["Automation", "AI"],
-  "author": "(Victorino, Sairesse) <sairessy@gmail.com>",
+  "keywords": [
+    "Automation",
+    "AI"
+  ],
+  "author": "Victorino, Sairesse",
   "license": "MIT",
   "dependencies": {
     "cookie-parser": "^1.4.6",
@@ -23,6 +26,8 @@
     "express": "^4.18.1",
     "express-jwt": "^8.4.1",
     "knex": "^2.3.0",
+    "mongodb": "^6.6.2",
+    "mongoose": "^8.4.0",
     "mysql": "^2.18.1",
     "nedb": "^1.8.0",
     "node-nlp": "^4.27.0",
