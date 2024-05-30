@@ -50,74 +50,60 @@ export const user = async (req, res) => {
 };
 
 export const sendConfirmationCode = async (req, res) => {
-  const { email, app } = req.body;
-  db.user.users.findOne({ email, app }, (err, doc) => {
-    if (doc === null) {
+  const { email, app = null} = req.body;
+  const users = await User.find({ email, app_id: app });
+    if (users.length === 0) {
       const code = String(Math.random()).substring(2, 7);
       console.log(code);
-      sendMail(email, app, "Codigo de confirmação: " + code);
+      sendMail(email, app || "", "Codigo de confirmação: " + code);
       res.json({ msg: "Enviamos o código de confirmação para " + email, code });
     } else {
       res
         .status(409)
         .json({ msg: "Este email já foi usado, opte em recuperá-lo." });
     }
-  });
 };
 
 export const sendRecoveryCode = async (req, res) => {
-  const email = req.body.email;
-  const app = 'consultor';
-  db.user.users.findOne({ email }, (err, doc) => {
-    if (!doc) {
+  const {email, app = null} = req.body;
+
+  const users = await User.find({ email, app_id: app});
+    if (users.length === 0) {
       res.status(409).json({ info: "O email não existe!" });
     } else {
       const code = String(Math.random()).substring(2, 7);
-      sendMail(email, app, "Código de recuperação:" + code);
-      console.log("======================")
+      sendMail(email, app || "", "Código de recuperação:" + code);
       console.log(code, email, app);
-      db.user.users.update(
-        { email },
-        {
-          $set: {
-            recovery_code: code
-          },
-        }
-      );
-
+      const user = users[0];
+      user.recovery_code = code;
+      await user.save();
       res.json({ success: true });
     }
-  });
 };
 
 export const changePass = async (req, res) => {
-  const { email, pass, code, app } = req.body;
-
-  db.user.users.update(
-    { email, recovery_code: code },
-    {
-      $set: {  pass, app },
-    },
-    (err, num) => {
-      if (num === 0) {
+  const { email, pass, code, app = null } = req.body;
+  const users = await User.find({email, recobery_code, app_id: app});
+  
+      if (users.length === 0) {
         res
           .status(409)
           .json({ msg: "O código introduzido é incorrecto, tente novamente." });
       } else {
+        const user = users[0];
+        user.pass = pass;
+        user.app_id = app;
+        await user.save();
         res.json({ msg: "Senha alterada com successo." });
       }
-    }
-  );
 };
 
 export const update = async (req, res) => {
-  //const { surname, name, tel, bairro, area, desc } = req.body;
   const _id = req.headers.user;
-  db.user.users.update(
-    { _id },
-    { $set: req.body },
-    (err, num) => {
-      res.json({});
-    }
-  );
+  const user = await User.findById(_id);
+  for (const prop in req.body) {
+    user[prop] = req.body[prop];
+  }
+  const updatedUser = await user.save();
+  res.json(updatedUser);
 };
