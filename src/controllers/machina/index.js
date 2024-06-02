@@ -1,29 +1,24 @@
-import Machina from '../../models/machina/index.js'
-import db from '../../services/nedb/index.js'
+import { Machina } from '../../services/mongoose/index.js';
 
 export const create = async (req, res) => {
-  const params = req.body
-  db.machina.machinas.insert(params, (err, doc) => {
-    res.json(doc)
-  })
+  const machina = await (new Machina(req.body)).save();
+  res.json(machina);
 }
 
-export const update = (req, res) => {
-  const _id = req.params.id
-  const data = req.body
-  db.machina.machinas.update({_id}, {$set: data}, (err, num) => {
-    res.json({sucess: num > 0, new_data: data});
-  })
+export const update = async (req, res) => {
+  const _id = req.headers.id;
+  const updatedMachina = await Machina.findOneAndUpdate({ _id }, req.body, { new: true });
+  res.json(updatedMachina);
 }
 
 export const findById = async (req, res) => {
   const _id = req.params.id;
   if(_id.toLowerCase() == 'all') {
-    db.machina.machinas.find({}, (err, data) => res.json(data));
-  } else
-  db.machina.machinas.findOne({_id}, (err, doc) => {
-    res.json(doc)
-  })
+    Machina.find().then((machinas)=> res.json(machinas));
+  } else {
+    const machina = await Machina.findById(_id);
+    res.json(machina);
+  }
 }
 
 export const removeAttr = async (req, res) => {

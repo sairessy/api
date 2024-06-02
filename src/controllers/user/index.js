@@ -1,18 +1,18 @@
 import { User } from "../../services/mongoose/index.js";
-import db from "../../services/nedb/index.js";
 import sendMail from "../../services/nodemailer/send_mail.js";
+import { hash } from '../../config/index.js';
 
 export const create = async (req, res) => {
   const { email, pass, app: app_id } = req.body;
   
-  const doc = await (new User({email, pass, app_id})).save();
+  const doc = await (new User({email, pass: hash(pass), app_id})).save();
   res.status(200).json(doc);
 };
 
 export const login = async (req, res) => {
   const { email, pass, app = null } = req.body;
   try {
-    const users = await User.find({email, pass, app_id: app})
+    const users = await User.find({email, pass: hash(pass), app_id: app})
       if (users.length === 0) {
         res
           .status(409)
@@ -100,10 +100,7 @@ export const changePass = async (req, res) => {
 
 export const update = async (req, res) => {
   const _id = req.headers.user;
-  const user = await User.findById(_id);
-  for (const prop in req.body) {
-    user[prop] = req.body[prop];
-  }
-  const updatedUser = await user.save();
+
+  const updatedUser = await User.findOneAndUpdate({ _id }, req.body, { new: true });
   res.json(updatedUser);
 };

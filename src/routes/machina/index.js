@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
 
 router.get('/:id', findById);
 router.post("/create", create);
-router.put("/update/:id", update);
+router.put("/update", update);
 router.delete('/remove/:id', remove);
 router.put('/remove-attr/:id', removeAttr);
 

@@ -8,22 +8,19 @@ mongoose.connect(`mongodb+srv://sairessy:${env.MONGO_PASS}@cluster0.bpljm3t.mong
 
 // Models
 // user
-export const User = mongoose.model('User', { 
-  name: String,
-  email: String, 
-  pass: String,
-  app_id: String,
-  created_at: Date,
-  recovery_code: Number
-});
+export const User = mongoose.model('User', 
+  new mongoose.Schema({ 
+    email: String, 
+    pass: String,
+    app_id: String,
+    created_at: Date,
+    recovery_code: Number
+  }, {strict: false})
+);
 
 // machina
-export const Lock = mongoose.model('Lock', {
-  label: String,
-  locked: Boolean
-});
-
-export const Lamp = mongoose.model('Lamp', {
-  label: String,
-  on: Boolean
-});
+export const Machina = mongoose.model('Machina', new mongoose.Schema({
+    label: String,
+    on: Boolean
+  }, {strict: false})
+);
