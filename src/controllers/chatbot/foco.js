@@ -13,11 +13,14 @@ manager.addAnswer('en', 'mostra.cursos', 'A nossa instituição oferece o curso 
 manager.addAnswer('en', 'mostra.duracao', 'Todos cursos duram 3 anos, com excessão do curso de Educação de Infância, que dura apenas um ano.');
 manager.addAnswer('en', 'mostra.periodo', 'Os cursos são leccionados em todos periodos do dia, isto é, de manhã, de tarde e de noite.');
 manager.addAnswer('en', 'start', 'As aulas iniciam em Março de cada ano, e sao leccionadas por bimestre.');
-manager.addAnswer('en', 'thanks', 'De nada.')
+manager.addAnswer('en', 'thanks', 'De nada.');
 
-export default async function reply(text) {
+(async () => {
   await manager.train();
   manager.save('./src/node-nlp-models/foco.nlp');
+})();
+
+export default async function reply(text) {
   const response = await manager.process('en', text);
   return response.answer;
 }

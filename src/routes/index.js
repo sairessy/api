@@ -1,19 +1,13 @@
 import express from "express";
-import cors from "cors";
 import http from "http";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 // IMPORT ROUTES
 import main from "./main/index.js";
 import automata from "./automata/index.js";
 import user from "./user/index.js";
-import feedback from "./feedback/index.js";
-import work from "./work/index.js";
-import gestor from "./gestor/index.js";
 import machina from './machina/index.js';
-import notify from './notify/index.js';
-import tecnico from './tecnico/index.js';
-// import chatbot from './chatbot/index.js';
 
 // EXPRESS CONFIG.
 const app = express();
@@ -27,12 +21,6 @@ const server = http.createServer(app);
 app.use("/", main);
 app.use("/user", user);
 app.use("/automata", automata);
-app.use('/feedback', feedback);
-app.use('/work', work);
-app.use('/gestor', gestor);
 app.use('/machina', machina);
-app.use('/notify', notify);
-app.use('/tecnico', tecnico);
-// app.use('/chatbot', chatbot);
 
 export default server;

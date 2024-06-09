@@ -10,15 +10,16 @@ export const create = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { email, pass, app = null } = req.body;
+  const { email, pass} = req.body;
+  const app_id = req.headers.app;
   try {
-    const users = await User.find({email, pass: hash(pass), app_id: app})
+    const users = await User.find({email, pass: hash(pass), app_id})
       if (users.length === 0) {
         res
           .status(409)
-          .json({ success: false, msg: "Credenciais incorrectas!" });
+          .json({ info: "Credenciais incorrectas!" });
       } else {
-        return res.json({ success: true, user: users[0]._id });
+        return res.json(users[0]);
       }
   } catch (error) {
     console.log(error);
