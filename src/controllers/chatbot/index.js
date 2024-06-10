@@ -1,6 +1,10 @@
-import fManager from './foco.js';
+import { NlpManager } from 'node-nlp';
+
+const manager = new NlpManager();
 
 export const chat = async (req, res) => {
-  const r = await fManager(req.params.text);
-  res.json({answer: r || "Desculpa, não consigo lhe compreender, por favor refraseie."})
+  const model = `./src/node-nlp-models/${req.headers.org}.nlp`;
+  manager.load(model);
+  const r = await manager.process('en', req.body.text);
+  res.json(r);
 }

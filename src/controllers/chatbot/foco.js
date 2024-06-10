@@ -16,11 +16,11 @@ manager.addAnswer('en', 'start', 'As aulas iniciam em Março de cada ano, e sao 
 manager.addAnswer('en', 'thanks', 'De nada.');
 
 (async () => {
-  await manager.train();
-  manager.save('./src/node-nlp-models/foco.nlp');
+    try {
+      await manager.train();
+      manager.save('./src/node-nlp-models/foco.nlp');
+      console.log('Model trained and saved successfully!');
+    } catch (err) {
+      console.log(err);
+    }
 })();
-
-export default async function reply(text) {
-  const response = await manager.process('en', text);
-  return response.answer;
-}

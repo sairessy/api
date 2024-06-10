@@ -5,8 +5,9 @@ import {
 
 const router = express.Router();
 
-router.get("/", (req, res) => res.json({app: 'ChatBot'}));
-router.get("/:user/:text", chat);
-
+router.get("/", (req, res) => {
+  res.json({app: 'ChatBot'});
+});
+router.post("/chat", chat);
 
 export default router;
