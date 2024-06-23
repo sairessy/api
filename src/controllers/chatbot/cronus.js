@@ -1,19 +1,23 @@
-import { NlpManager } from 'node-nlp';
+import { NlpManager } from "node-nlp";
 
-const manager = new NlpManager({ languages: ['en'], forceNER: true });
+const manager = new NlpManager({ languages: ["en"], forceNER: true });
 
-manager.addDocument('en', 'time', 'show.time');
-manager.addDocument('en', 'wether', 'show.wether');
+manager.addDocument("en", "Hi cronus", "greetings");
+manager.addDocument("en", "Thank", "thanks");
+manager.addDocument("en", "time", "show.time");
+manager.addDocument("en", "wether", "show.wether");
 
-manager.addAnswer('en', 'show.time', '');
-manager.addAnswer('en', 'show.wether', '');
+manager.addAnswer("en", "greetings", "");
+manager.addAnswer("en", "thanks", "No problem, i am here to help.");
+manager.addAnswer("en", "show.time", "");
+manager.addAnswer("en", "show.wether", "");
 
 (async () => {
-    try {
-      await manager.train();
-      manager.save('./src/node-nlp-models/cronus.nlp');
-      console.log('Model trained and saved successfully!');
-    } catch (err) {
-      console.log(err);
-    }
+  try {
+    await manager.train();
+    manager.save("./src/node-nlp-models/cronus.nlp");
+    console.log("Model trained and saved successfully!");
+  } catch (err) {
+    console.log(err);
+  }
 })();
