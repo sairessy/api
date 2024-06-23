@@ -1,7 +1,7 @@
 {
   "settings": {
     "languages": [
-      "en"
+      "pt"
     ],
     "forceNER": true,
     "tag": "nlp",
@@ -17,15 +17,15 @@
       "tag": "nlu-manager"
     },
     "locales": [
-      "en"
+      "pt"
     ],
     "languageNames": {},
     "domainManagers": {
-      "en": {
+      "pt": {
         "settings": {
-          "locale": "en",
+          "locale": "pt",
           "trainByDomain": false,
-          "tag": "domain-manager-en",
+          "tag": "domain-manager-pt",
           "nluByDomain": {
             "default": {
               "className": "NeuralNlu",
@@ -35,19 +35,19 @@
           "useStemDict": true
         },
         "stemDict": {
-          "cronus,hi": {
+          "cronus,ola": {
             "intent": "greetings",
             "domain": "default"
           },
-          "thank": {
+          "obrig": {
             "intent": "thanks",
             "domain": "default"
           },
-          "time": {
+          "hor": {
             "intent": "show.time",
             "domain": "default"
           },
-          "wether": {
+          "temperatur": {
             "intent": "show.wether",
             "domain": "default"
           }
@@ -61,30 +61,30 @@
         "sentences": [
           {
             "domain": "default",
-            "utterance": "Hi cronus",
+            "utterance": "Olá cronus",
             "intent": "greetings"
           },
           {
             "domain": "default",
-            "utterance": "Thank",
+            "utterance": "Obrigado",
             "intent": "thanks"
           },
           {
             "domain": "default",
-            "utterance": "time",
+            "utterance": "hora",
             "intent": "show.time"
           },
           {
             "domain": "default",
-            "utterance": "wether",
+            "utterance": "temperatura",
             "intent": "show.wether"
           }
         ],
         "domains": {
           "master_domain": {
             "settings": {
-              "locale": "en",
-              "tag": "nlu-en",
+              "locale": "pt",
+              "tag": "nlu-pt",
               "keepStopwords": true,
               "nonefeatureValue": 1,
               "nonedeltaMultiplier": 1.2,
@@ -94,11 +94,11 @@
               "log": true
             },
             "features": {
-              "hi": 1,
+              "ola": 1,
               "cronus": 1,
-              "thank": 1,
-              "time": 1,
-              "wether": 1
+              "obrig": 1,
+              "hor": 1,
+              "temperatur": 1
             },
             "intents": {
               "greetings": 1,
@@ -108,40 +108,40 @@
             },
             "intentFeatures": {
               "greetings": {
-                "hi": 1,
+                "ola": 1,
                 "cronus": 1
               },
               "thanks": {
-                "thank": 1
+                "obrig": 1
               },
               "show.time": {
-                "time": 1
+                "hor": 1
               },
               "show.wether": {
-                "wether": 1
+                "temperatur": 1
               }
             },
             "featuresToIntent": {
-              "hi": [
+              "ola": [
                 "greetings"
               ],
               "cronus": [
                 "greetings"
               ],
-              "thank": [
+              "obrig": [
                 "thanks"
               ],
-              "time": [
+              "hor": [
                 "show.time"
               ],
-              "wether": [
+              "temperatur": [
                 "show.wether"
               ]
             },
             "neuralNetwork": {
               "settings": {
-                "locale": "en",
-                "tag": "nlu-en",
+                "locale": "pt",
+                "tag": "nlu-pt",
                 "keepStopwords": true,
                 "nonefeatureValue": 1,
                 "nonedeltaMultiplier": 1.2,
@@ -151,11 +151,11 @@
                 "log": true
               },
               "features": [
-                "hi",
+                "ola",
                 "cronus",
-                "thank",
-                "time",
-                "wether"
+                "obrig",
+                "hor",
+                "temperatur"
               ],
               "intents": [
                 "greetings",
@@ -205,20 +205,20 @@
     "intentDomains": {},
     "extraSentences": [
       [
-        "en",
-        "Hi cronus"
+        "pt",
+        "Olá cronus"
       ],
       [
-        "en",
-        "Thank"
+        "pt",
+        "Obrigado"
       ],
       [
-        "en",
-        "time"
+        "pt",
+        "hora"
       ],
       [
-        "en",
-        "wether"
+        "pt",
+        "temperatura"
       ]
     ]
   },
@@ -235,7 +235,7 @@
       "tag": "nlg-manager"
     },
     "responses": {
-      "en": {
+      "pt": {
         "greetings": [
           {
             "answer": ""
@@ -243,7 +243,7 @@
         ],
         "thanks": [
           {
-            "answer": "No problem, i am here to help."
+            "answer": "De nada."
           }
         ],
         "show.time": [

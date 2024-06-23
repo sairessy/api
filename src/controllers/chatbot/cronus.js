@@ -1,16 +1,16 @@
 import { NlpManager } from "node-nlp";
 
-const manager = new NlpManager({ languages: ["en"], forceNER: true });
+const manager = new NlpManager({ languages: ["pt"], forceNER: true });
 
-manager.addDocument("en", "Hi cronus", "greetings");
-manager.addDocument("en", "Thank", "thanks");
-manager.addDocument("en", "time", "show.time");
-manager.addDocument("en", "wether", "show.wether");
+manager.addDocument("pt", "Olá cronus", "greetings");
+manager.addDocument("pt", "Obrigado", "thanks");
+manager.addDocument("pt", "hora", "show.time");
+manager.addDocument("pt", "temperatura", "show.wether");
 
-manager.addAnswer("en", "greetings", "");
-manager.addAnswer("en", "thanks", "No problem, i am here to help.");
-manager.addAnswer("en", "show.time", "");
-manager.addAnswer("en", "show.wether", "");
+manager.addAnswer("pt", "greetings", "");
+manager.addAnswer("pt", "thanks", "De nada.");
+manager.addAnswer("pt", "show.time", "");
+manager.addAnswer("pt", "show.wether", "");
 
 (async () => {
   try {
