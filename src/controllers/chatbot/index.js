@@ -7,7 +7,6 @@ export const chat = async (req, res) => {
     const model = `./src/node-nlp-models/${req.headers.bot}.nlp`;
     manager.load(model);
     const r = await manager.process('pt', req.body.text);
-    console.log(req.body)
     res.json(r);
   } catch (err) {
     console.log(err);

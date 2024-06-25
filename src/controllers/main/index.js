@@ -74,3 +74,25 @@ export const getDistritos = (req, res) => {
 
   res.json(distritos);
 };
+
+export const getMusics = (req, res) => {
+  const musics = [
+    {
+      id: 0,
+      url: "https://the-music-link.com/0",
+    },
+  ];
+
+  res.json(musics);
+};
+
+export const getResource = (req, res) => {
+  const id = req.headers.id;
+  const data = req.body;
+
+  console.log(id, data);
+
+  const resource = {};
+
+  res.json(resource);
+};
