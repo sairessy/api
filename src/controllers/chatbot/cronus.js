@@ -7,15 +7,18 @@ manager.addDocument("pt", "Obrigado", "thanks");
 manager.addDocument("pt", "hora", "show.time");
 manager.addDocument("pt", "temperatura", "show.wether");
 manager.addDocument("pt", "toca música", "play.music");
+manager.addDocument("pt", "para música", "stop.music");
 manager.addDocument("pt", "piada", "tell.joke");
+manager.addDocument("pt", "Envia mensagem", "send.msg");
 
 manager.addAnswer("pt", "greetings", "");
 manager.addAnswer("pt", "thanks", "De nada.");
 manager.addAnswer("pt", "show.time", "");
 manager.addAnswer("pt", "show.wether", "");
 manager.addAnswer("pt", "play.music", "");
+manager.addAnswer("pt", "stop.music", "");
 manager.addAnswer("pt", "tell.joke", "");
-
+manager.addAnswer("pt", "send.msg", "");
 
 (async () => {
   try {
