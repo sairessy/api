@@ -2,6 +2,7 @@ import XLSX from "xlsx";
 import path from "path";
 import { __dirname } from "../../config/index.js";
 import { env } from "../../config/index.js";
+import sendMail from "../../services/nodemailer/send_mail.js";
 
 export const home = (req, res) => {
   const auth = req.headers.authorization;
@@ -96,3 +97,12 @@ export const getResource = (req, res) => {
 
   res.json(resource);
 };
+
+export const cronusSendMsg = async (req, res) => {
+  const data = req.body;
+  const {email, name} = data.contact;
+  const user = req.headers.user;
+  const text = data.text;
+  sendMail(email, `CRONUS > ${user}`, text);
+  res.json({})
+}
