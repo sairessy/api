@@ -7,8 +7,9 @@ manager.addDocument("pt", "Obrigado", "thanks");
 manager.addDocument("pt", "hora", "show.time");
 manager.addDocument("pt", "temperatura", "show.wether");
 manager.addDocument("pt", "toca música", "play.music");
+manager.addDocument("pt", "outra música", "play.music");
 manager.addDocument("pt", "para música", "stop.music");
-manager.addDocument("pt", "piada", "tell.joke");
+manager.addDocument("pt", "anedota piada", "tell.joke");
 manager.addDocument("pt", "Envia mensagem", "send.msg");
 
 manager.addAnswer("pt", "greetings", "");
