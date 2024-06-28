@@ -16,7 +16,16 @@ export const areas = [
   {
     id: "engel",
     label: "Electricidade",
-    tags: ["electricista", "electricidade", "electrico", "eléctrico"],
+    tags: [
+      "electricista",
+      "electricidade",
+      "electrico",
+      "eléctrico",
+      "eletricista",
+      "eletricidade",
+      "eletrico",
+      "elétrico",
+    ],
   },
   { id: "eletnc", label: "Electrônica" },
   { id: "engmec", label: "Mecânica" },

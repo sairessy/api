@@ -59,7 +59,7 @@
             "intent": "play.music",
             "domain": "default"
           },
-          "music,par": {
+          "deslig,music": {
             "intent": "stop.music",
             "domain": "default"
           },
@@ -129,7 +129,7 @@
           },
           {
             "domain": "default",
-            "utterance": "para música",
+            "utterance": "desligue música",
             "intent": "stop.music"
           },
           {
@@ -180,7 +180,7 @@
               "toc": 1,
               "music": 1,
               "outr": 1,
-              "par": 1,
+              "deslig": 1,
               "anedot": 1,
               "piad": 1,
               "envi": 1,
@@ -224,7 +224,7 @@
                 "outr": 1
               },
               "stop.music": {
-                "par": 1,
+                "deslig": 1,
                 "music": 1
               },
               "tell.joke": {
@@ -273,7 +273,7 @@
               "outr": [
                 "play.music"
               ],
-              "par": [
+              "deslig": [
                 "stop.music"
               ],
               "anedot": [
@@ -329,7 +329,7 @@
                 "toc",
                 "music",
                 "outr",
-                "par",
+                "deslig",
                 "anedot",
                 "piad",
                 "envi",
@@ -608,7 +608,7 @@
       ],
       [
         "pt",
-        "para música"
+        "desligue música"
       ],
       [
         "pt",
