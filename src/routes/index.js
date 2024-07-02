@@ -9,6 +9,7 @@ import automata from "./automata/index.js";
 import user from "./user/index.js";
 import machina from './machina/index.js';
 import chatbot from './chatbot/index.js';
+import cronus from './cronus/index.js';
 
 // EXPRESS CONFIG.
 const app = express();
@@ -24,5 +25,6 @@ app.use("/user", user);
 app.use("/automata", automata);
 app.use('/machina', machina);
 app.use('/chatbot', chatbot);
+app.use('/cronus', cronus);
 
 export default server;
