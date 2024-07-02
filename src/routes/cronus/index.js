@@ -2,8 +2,8 @@ import express from "express";
 
 import { createStaff, createStaffCategoria, getStaff, getStaffCategoria,  } from "../../controllers/cronus/Staff.js";
 import { createCredito, getCredito } from "../../controllers/cronus/Credito.js";
-import { createStock, getStock, createStockCategoria } from "../../controllers/cronus/Stock.js";
-import { createAsset, createAssetCategoria, getAsset } from "../../controllers/cronus/Asset.js";
+import { createStock, getStock, createStockCategoria, getStockCategoria } from "../../controllers/cronus/Stock.js";
+import { createAsset, createAssetCategoria, getAsset, getAssetCategoria } from "../../controllers/cronus/Asset.js";
 
 const router = express.Router();
 
@@ -19,14 +19,16 @@ router.get("/staff/categoria/", getStaffCategoria);
 router.get("/credito/", getCredito);
 router.post("/credito/create", createCredito);
 
-// Stock
+// Inventario
 router.get("/stock/", getStock);
 router.post("/stock/create", createStock);
 router.post("/stock/categoria/create", createStockCategoria);
+router.get("/stock/categoria/", getStockCategoria);
 
 // Asset
 router.get("/asset/", getAsset);
 router.post("/asset/create", createAsset);
 router.post("/asset/categoria/create", createAssetCategoria);
+router.get("/asset/categoria/", getAssetCategoria);
 
 export default router;

@@ -40,3 +40,13 @@ export const createStockCategoria = async (req, res) => {
     res.status(409).json({});
   }
 };
+
+export const getStockCategoria = async (req, res) => {
+  try {
+    const stock = await StockCategoria.find();
+    res.json(stock);
+  } catch (error) {
+    console.log(error);
+    res.status(409).json({});
+  }
+};
