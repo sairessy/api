@@ -2,6 +2,7 @@ import { Staff } from "../../models/cronus/staff.js";
 import { Stock } from "../../models/cronus/stock.js";
 import { Credito } from "../../models/cronus/credito.js";
 import { Asset } from "../../models/cronus/asset.js";
+import { Sell } from "../../models/cronus/Sell.js";
 
 export const removeItem = async (req, res) => {
   const { id, item } = req.body;
@@ -40,6 +41,16 @@ export const removeItem = async (req, res) => {
 
   if (item === "credito") {
     const data = await Credito.findOneAndUpdate(
+      { _id: id },
+      { removed: true },
+      { new: true }
+    );
+
+    res.json(data);
+  }
+
+  if (item === "sales") {
+    const data = await Sell.findOneAndUpdate(
       { _id: id },
       { removed: true },
       { new: true }
