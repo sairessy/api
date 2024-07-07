@@ -21,7 +21,7 @@ import {
   getAsset,
   getAssetCategoria,
 } from "../../controllers/cronus/Asset.js";
-import { createSell, getSales } from "../../controllers/cronus/sell.js";
+import { createSell, getSales } from "../../controllers/cronus/Sell.js";
 
 const router = express.Router();
 
