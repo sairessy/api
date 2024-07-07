@@ -49,3 +49,14 @@ export const getStaffCategoria = async (req, res) => {
     res.status(409).json({});
   }
 };
+
+export const updateStaff = async (req, res) => {
+  const staff = req.headers.staff;
+  try {
+    const update = await Staff.findOneAndUpdate({ _id: staff }, req.body, { new: true });
+    res.json(update);
+  } catch (error) {
+    console.log(error);
+    res.status(409).json({});
+  }
+};

@@ -6,6 +6,7 @@ import {
   createStaffCategoria,
   getStaff,
   getStaffCategoria,
+  updateStaff,
 } from "../../controllers/cronus/Staff.js";
 import { createCredito, getCredito } from "../../controllers/cronus/Credito.js";
 import {
@@ -32,6 +33,7 @@ router.delete("/remove", removeItem);
 // Staff
 router.get("/staff/", getStaff);
 router.post("/staff/create", createStaff);
+router.put("/staff/update", updateStaff);
 router.post("/staff/categoria/create", createStaffCategoria);
 router.get("/staff/categoria/", getStaffCategoria);
 
