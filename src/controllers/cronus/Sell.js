@@ -20,8 +20,10 @@ export const createSell = async (req, res) => {
 };
 
 export const getSales = async (req, res) => {
+  const user = req.headers.user;
+
   try {
-    const sales = await Sell.find();
+    const sales = await Sell.find({user});
     res.json(sales);
   } catch (error) {
     console.log(error);

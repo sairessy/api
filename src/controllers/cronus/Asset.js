@@ -1,8 +1,10 @@
 import { Asset, AssetCategoria } from "../../models/cronus/asset.js";
 
 export const getAsset = async (req, res) => {
+  const user = req.headers.user;
+
   try {
-    const asset = await Asset.find();
+    const asset = await Asset.find({user});
     res.json(asset);
   } catch (error) {
     console.log(error);
@@ -11,8 +13,10 @@ export const getAsset = async (req, res) => {
 };
 
 export const getAssetCategoria = async (req, res) => {
+  const user = req.headers.user;
+
   try {
-    const asset = await AssetCategoria.find();
+    const asset = await AssetCategoria.find({user});
     res.json(asset);
   } catch (error) {
     console.log(error);
@@ -23,8 +27,6 @@ export const getAssetCategoria = async (req, res) => {
 export const createAsset = async (req, res) => {
   const data = req.body;
   const user = req.headers.user;
-
-  console.log(data, user)
 
   try {
     const staff = await new Asset({...data, user}).save();
@@ -38,8 +40,6 @@ export const createAsset = async (req, res) => {
 export const createAssetCategoria = async (req, res) => {
   const data = req.body;
   const user = req.headers.user;
-
-  console.log(data, user)
 
   try {
     const categoria = await new AssetCategoria({...data, user}).save();
