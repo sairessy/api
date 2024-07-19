@@ -14,6 +14,7 @@ import {
   getStock,
   createStockCategoria,
   getStockCategoria,
+  getTotalStockServices,
 } from "../../controllers/cronus/Stock.js";
 import {
   createAsset,
@@ -41,11 +42,12 @@ router.get("/staff/categoria/", getStaffCategoria);
 router.get("/credito/", getCredito);
 router.post("/credito/create", createCredito);
 
-// Inventario
+// Stock
 router.get("/stock/", getStock);
 router.post("/stock/create", createStock);
 router.post("/stock/categoria/create", createStockCategoria);
 router.get("/stock/categoria/", getStockCategoria);
+router.get("/stock/total-stock-servicos", getTotalStockServices);
 
 // Asset
 router.get("/asset/", getAsset);
