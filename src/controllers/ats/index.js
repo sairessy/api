@@ -7,6 +7,6 @@ export const home = (req, res) => {
 export const subscribeEmail = async (req, res) => {
   const email = req.body.email;
 
-  const doc = await(new Subscriber({ email })).save();
+  const doc = await(new Subscriber({ email, createdAt: new Date() })).save();
   res.status(200).json(doc);
 };
