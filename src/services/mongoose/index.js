@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
 import { env } from "../../config/index.js";
 
-// `mongodb+srv://sairessy:${env.MONGO_PASS}@cluster0.bpljm3t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 mongoose
   .connect(
-    'mongodb://127.0.0.1:27017'
+    'mongodb+srv://sairessy:${env.MONGO_PASS}@cluster0.bpljm3t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
   )
   .catch((err) => {
     console.log("MongoDB connection error");
