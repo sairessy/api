@@ -8,6 +8,15 @@ import {
   getStaffCategoria,
   updateStaff,
 } from "../../controllers/cronus/Staff.js";
+
+import {
+  createClient,
+  createClientCategoria,
+  getClient,
+  getClientCategoria,
+  updateClient,
+} from "../../controllers/cronus/Client.js";
+
 import { createCredito, getCredito } from "../../controllers/cronus/Credito.js";
 import {
   createStock,
@@ -37,6 +46,13 @@ router.post("/staff/create", createStaff);
 router.put("/staff/update", updateStaff);
 router.post("/staff/categoria/create", createStaffCategoria);
 router.get("/staff/categoria/", getStaffCategoria);
+
+// Client
+router.get("/client/", getClient);
+router.post("/client/create", createClient);
+router.put("/client/update", updateClient);
+router.post("/client/categoria/create", createClientCategoria);
+router.get("/client/categoria/", getClientCategoria);
 
 // Credito
 router.get("/credito/", getCredito);

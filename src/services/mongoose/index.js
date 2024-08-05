@@ -1,14 +1,15 @@
 import mongoose from "mongoose";
 import { env } from "../../config/index.js";
 
-mongoose
-  .connect(
+try {
+  mongoose.createConnection(
     `mongodb+srv://sairessy:${env.MONGO_PASS}@cluster0.bpljm3t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
-  )
-  .catch((err) => {
-    console.log("MongoDB connection error");
-    console.log(String(err));
-  });
+    // "mongodb://localhost:27017/test"
+  );
+} catch (error) {
+  console.log("MongoDB connection error");
+  console.log(error);
+}
 
 // Models
 // user
