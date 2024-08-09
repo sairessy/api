@@ -55,7 +55,9 @@ export const getTotalStockServices = async (req, res) => {
   const user = req.headers.user;
 
   const stock = (await Stock.find({ user })).filter(({ removed }) => !removed);
-  const asset = (await Asset.find({ user })).filter(({ removed }) => !removed);
+  const asset = (await Asset.find({  })).filter(({ removed }) => !removed);
+
+  console.log(stock, asset, user)
 
   let s_total = 0;
   let a_total = 0;

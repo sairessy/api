@@ -1,14 +1,12 @@
 import mongoose from "mongoose";
-import { env } from "../../config/index.js";
+import { env, mongoConnectionString } from "../../config/index.js";
 
-mongoose
-  .connect(
-    `mongodb+srv://sairessy:${env.MONGO_PASS}@cluster0.bpljm3t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
-  )
-  .catch((err) => {
-    console.log("MongoDB connection error");
-    console.log(String(err));
-  });
+try {
+  mongoose.connect(mongoConnectionString);
+} catch (error) {
+  console.log("MongoDB connection error");
+  console.log(error);
+}
 
 // Credito
 export const Credito = mongoose.model(

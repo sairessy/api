@@ -1,14 +1,14 @@
+// import { Stock } from "../../models/cronus/Stock.js";
 import { Sell } from "../../models/cronus/Sell.js";
 
 export const createSell = async (req, res) => {
   const data = req.body;
   const user = req.headers.user;
 
-  console.log(data, user);
-
   try {
     const sell = await new Sell({
-      cart: data,
+      cart: data.cart,
+      bi: data.bi,
       created_at: new Date(),
       user,
     }).save();
@@ -24,6 +24,17 @@ export const getSales = async (req, res) => {
 
   try {
     const sales = await Sell.find({user});
+
+    // for (let i = 0; i < sales.length; i++) {
+    //   const sale = sales[i];
+    //   for (let j = 0; j < sale.cart.length; j++) {
+    //     const cart = sale.cart
+    //     const p = await Stock({_id: cart[j].product})
+    //     console.log(p)
+    //   }
+    // }
+      
+
     res.json(sales);
   } catch (error) {
     console.log(error);
