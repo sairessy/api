@@ -24,12 +24,14 @@ import {
   createStockCategoria,
   getStockCategoria,
   getTotalStockServices,
+  updateStock,
 } from "../../controllers/cronus/Stock.js";
 import {
   createAsset,
   createAssetCategoria,
   getAsset,
   getAssetCategoria,
+  updateAsset,
 } from "../../controllers/cronus/Asset.js";
 import { createSell, getSales } from "../../controllers/cronus/Sell.js";
 
@@ -61,6 +63,7 @@ router.post("/credito/create", createCredito);
 // Stock
 router.get("/stock/", getStock);
 router.post("/stock/create", createStock);
+router.put("/stock/update", updateStock);
 router.post("/stock/categoria/create", createStockCategoria);
 router.get("/stock/categoria/", getStockCategoria);
 router.get("/stock/total-stock-servicos", getTotalStockServices);
@@ -70,6 +73,7 @@ router.get("/asset/", getAsset);
 router.post("/asset/create", createAsset);
 router.post("/asset/categoria/create", createAssetCategoria);
 router.get("/asset/categoria/", getAssetCategoria);
+router.put("/asset/update", updateAsset);
 
 // Sales
 router.get("/sales/", getSales);

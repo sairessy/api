@@ -30,8 +30,6 @@ export const createStaffCategoria = async (req, res) => {
   const data = req.body;
   const user = req.headers.user;
 
-  console.log(data, user)
-
   try {
     const categoria = await new StaffCategoria({...data, user}).save();
     res.json(categoria);

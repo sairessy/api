@@ -26,6 +26,18 @@ export const createStock = async (req, res) => {
   }
 };
 
+export const updateStock = async (req, res) => {
+  const stock = req.headers.stock;
+
+  try {
+    const data = await Stock.findOneAndUpdate({ _id: stock }, req.body, { new: true });
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(409).json({});
+  }
+};
+
 export const createStockCategoria = async (req, res) => {
   const data = req.body;
   const user = req.headers.user;
@@ -56,8 +68,6 @@ export const getTotalStockServices = async (req, res) => {
 
   const stock = (await Stock.find({ user })).filter(({ removed }) => !removed);
   const asset = (await Asset.find({  })).filter(({ removed }) => !removed);
-
-  console.log(stock, asset, user)
 
   let s_total = 0;
   let a_total = 0;

@@ -15,8 +15,6 @@ export const createClient = async (req, res) => {
   const data = req.body;
   const user = req.headers.user;
 
-  console.log(data, user)
-
   try {
     const client = await new Client({...data, user}).save();
     res.json(client);
@@ -29,8 +27,6 @@ export const createClient = async (req, res) => {
 export const createClientCategoria = async (req, res) => {
   const data = req.body;
   const user = req.headers.user;
-
-  console.log(data, user)
 
   try {
     const categoria = await new ClientCategoria({...data, user}).save();

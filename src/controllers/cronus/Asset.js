@@ -37,6 +37,19 @@ export const createAsset = async (req, res) => {
   }
 };
 
+export const updateAsset = async (req, res) => {
+  const asset = req.headers.asset;
+
+  try {
+    const data = await Asset.findOneAndUpdate({ _id: asset }, req.body, { new: true });
+    console.log(data)
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(409).json({});
+  }
+};
+
 export const createAssetCategoria = async (req, res) => {
   const data = req.body;
   const user = req.headers.user;
