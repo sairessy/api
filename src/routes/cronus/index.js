@@ -33,7 +33,11 @@ import {
   getAssetCategoria,
   updateAsset,
 } from "../../controllers/cronus/Asset.js";
-import { createSell, getSales } from "../../controllers/cronus/Sell.js";
+import {
+  createSell,
+  getSales,
+  getSalesPerMonth,
+} from "../../controllers/cronus/Sell.js";
 
 const router = express.Router();
 
@@ -77,6 +81,7 @@ router.put("/asset/update", updateAsset);
 
 // Sales
 router.get("/sales/", getSales);
+router.get("/sales/per-month", getSalesPerMonth);
 router.post("/sales/create", createSell);
 
 export default router;
