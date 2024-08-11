@@ -1,5 +1,5 @@
-// import { Stock } from "../../models/cronus/Stock.js";
 import { Sell } from "../../models/cronus/Sell.js";
+import { Stock } from "../../models/cronus/stock.js";
 
 export const createSell = async (req, res) => {
   const data = req.body;
@@ -25,15 +25,6 @@ export const getSales = async (req, res) => {
   try {
     const sales = await Sell.find({ user });
 
-    // for (let i = 0; i < sales.length; i++) {
-    //   const sale = sales[i];
-    //   for (let j = 0; j < sale.cart.length; j++) {
-    //     const cart = sale.cart
-    //     const p = await Stock({_id: cart[j].product})
-    //     console.log(p)
-    //   }
-    // }
-
     res.json(sales);
   } catch (error) {
     console.log(error);
@@ -44,64 +35,34 @@ export const getSales = async (req, res) => {
 export const getSalesPerMonth = async (req, res) => {
   const user = req.headers.user;
 
-  const year = 2024;
-
   try {
-    const sales = await Sell.aggregate([
-      {
-        $match: {
-          created_at: {
-            $gte: new Date(`${year}-01-01`),
-            $lt: new Date(`${year + 1}-01-01`)
-          }
-        }
-      },
-      {
-        $unwind: "$cart",
-      },
-      {
-        $lookup: {
-          from: "stocks",
-          localField: "cart.id",
-          foreignField: "product",
-          as: "productDetails",
-        },
-      },
-      {
-        $unwind: "$productDetails",
-      },
-      {
-        $group: {
-          _id: {
-            year: { $year: "$created_at" },
-            month: { $month: "$created_at" },
-          },
-          totalSales: {
-            $sum: {
-              $multiply: [
-                { $toInt: "$cart.quantidade" },
-                { $toDouble: "$productDetails.valor" },
-              ],
-            },
-          },
-          salesCount: { $sum: {$toInt: "$cart.quantidade" }},
-        },
-      },
-      {
-        $sort: { "_id.year": 1, "_id.month": 1 },
-      },
-    ]);
+    const year = 2024;
 
-    // for (let i = 0; i < sales.length; i++) {
-    //   const sale = sales[i];
-    //   for (let j = 0; j < sale.cart.length; j++) {
-    //     const cart = sale.cart
-    //     const p = await Stock({_id: cart[j].product})
-    //     console.log(p)
-    //   }
-    // }
+    const stock = await Stock.find({user});
+    const sales = await Sell.find({
+      created_at: {
+        $gte: new Date(`${year}-01-01`),
+        $lt: new Date(`${year + 1}-01-01`),
+      },
+      user
+    });
 
-    res.json(sales);
+    const meses = new Array(12);
+
+    for (let i = 0; i < meses.length; i++) {
+      meses[i] = 0;
+    }
+
+    for (const s of sales) {
+      for (const p of s.cart) {
+        const { valor } = stock.find(({ _id }) => _id == p.product);
+        const pd = { ...p, valor };
+        const mes = new Date(s.created_at).getMonth();
+        meses[mes] += parseFloat(pd.quantidade) * parseFloat(valor);
+      }
+    }
+
+    res.json(meses);
   } catch (error) {
     console.log(error);
     res.status(409).json({});
