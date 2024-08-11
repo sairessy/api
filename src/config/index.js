@@ -12,8 +12,8 @@ export const hash = (data) => {
   return crypto.createHash("sha256").update(data).digest("hex");
 };
 
-// export const mongoConnectionString = `mongodb+srv://sairessy:${env.MONGO_PASS}@cluster0.bpljm3t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
-export const mongoConnectionString = "mongodb://127.0.0.1:27017/test";
+export const mongoConnectionString = `mongodb+srv://sairessy:${env.MONGO_PASS}@cluster0.bpljm3t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+// export const mongoConnectionString = "mongodb://127.0.0.1:27017/test";
 // export const mongoConnectionString = `mongodb+srv://sairessy:uT7otkm8h295tGyh@cluster0.bpljm3t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 export const areas = [
