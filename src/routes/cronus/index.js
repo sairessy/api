@@ -37,6 +37,7 @@ import {
   createSell,
   getSales,
   getSalesPerMonth,
+  getSalesPerStock,
 } from "../../controllers/cronus/Sell.js";
 
 const router = express.Router();
@@ -82,6 +83,7 @@ router.put("/asset/update", updateAsset);
 // Sales
 router.get("/sales/", getSales);
 router.get("/sales/per-month", getSalesPerMonth);
+router.get("/sales/per-stock", getSalesPerStock);
 router.post("/sales/create", createSell);
 
 export default router;

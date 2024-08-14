@@ -5,7 +5,7 @@ export const getStock = async (req, res) => {
   const user = req.headers.user;
 
   try {
-    const stock = await Stock.find({ user });
+    const stock = await Stock.find({ user }).sort({desc: 1});
     res.json(stock);
   } catch (error) {
     console.log(error);
@@ -66,7 +66,7 @@ export const getStockCategoria = async (req, res) => {
 export const getTotalStockServices = async (req, res) => {
   const user = req.headers.user;
 
-  const stock = (await Stock.find({ user })).filter(({ removed }) => !removed);
+  const stock = (await Stock.find({ user, tipo: '0' })).filter(({ removed }) => !removed);
   const asset = (await Asset.find({  })).filter(({ removed }) => !removed);
 
   let s_total = 0;

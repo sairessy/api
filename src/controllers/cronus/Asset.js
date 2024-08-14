@@ -4,7 +4,7 @@ export const getAsset = async (req, res) => {
   const user = req.headers.user;
 
   try {
-    const asset = await Asset.find();
+    const asset = await Asset.find().sort({desc: 1});
     res.json(asset);
   } catch (error) {
     console.log(error);
@@ -42,7 +42,6 @@ export const updateAsset = async (req, res) => {
 
   try {
     const data = await Asset.findOneAndUpdate({ _id: asset }, req.body, { new: true });
-    console.log(data)
     res.json(data);
   } catch (error) {
     console.log(error);

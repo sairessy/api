@@ -41,7 +41,6 @@ export const byApp = async (req, res) => {
 
 export const user = async (req, res) => {
   const _id = req.params.id;
-  console.log(_id)
   const docs = await User.find({ _id });
   let doc = {};
   if (docs.length !== 0) {

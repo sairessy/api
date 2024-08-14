@@ -23,7 +23,7 @@ export const getSales = async (req, res) => {
   const user = req.headers.user;
 
   try {
-    const sales = await Sell.find({ user });
+    const sales = await Sell.find({ user }).sort({ created_at: -1 });
 
     res.json(sales);
   } catch (error) {
@@ -38,13 +38,13 @@ export const getSalesPerMonth = async (req, res) => {
   try {
     const year = 2024;
 
-    const stock = await Stock.find({user});
+    const stock = await Stock.find({ user });
     const sales = await Sell.find({
       created_at: {
         $gte: new Date(`${year}-01-01`),
         $lt: new Date(`${year + 1}-01-01`),
       },
-      user
+      user,
     });
 
     const meses = new Array(12);
@@ -67,4 +67,38 @@ export const getSalesPerMonth = async (req, res) => {
     console.log(error);
     res.status(409).json({});
   }
+};
+
+export const getSalesPerStock = async (req, res) => {
+  const user = req.headers.user;
+
+  let stock = await Stock.find({ user });
+  const sales = await Sell.find({ user });
+
+  stock = stock.map(
+    ({ desc, valor, quantidade, _id, categoria, tipo, user }) => ({
+      desc,
+      valor,
+      quantidade,
+      _id,
+      categoria,
+      tipo,
+      user,
+      sales: 0,
+    })
+  );
+
+  const carts = sales.map(({ cart }) => cart);
+
+  for (let i = 0; i < stock.length; i++) {
+    for (let j = 0; j < carts.length; j++) {
+      for (const p of carts[j]) {
+        if (stock[i]._id == p.product) {
+          stock[i].sales += parseFloat(p.quantidade);
+        }
+      }
+    }
+  }
+ 
+  res.json(stock);
 };

@@ -3,7 +3,7 @@ import { Staff, StaffCategoria } from "../../models/cronus/staff.js";
 export const getStaff = async (req, res) => {
   const user = req.headers.user;
   try {
-    const staff = await Staff.find({user});
+    const staff = await Staff.find({user}).sort({firstName: 1});
     res.json(staff);
   } catch (error) {
     console.log(error);
@@ -14,8 +14,6 @@ export const getStaff = async (req, res) => {
 export const createStaff = async (req, res) => {
   const data = req.body;
   const user = req.headers.user;
-
-  console.log(data, user)
 
   try {
     const staff = await new Staff({...data, user}).save();
