@@ -72,7 +72,7 @@ export const getSalesPerMonth = async (req, res) => {
 export const getSalesPerStock = async (req, res) => {
   const user = req.headers.user;
 
-  let stock = await Stock.find({ user });
+  let stock = await Stock.find({ user }).sort({desc: 1});
   const sales = await Sell.find({ user });
 
   stock = stock.map(

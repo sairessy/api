@@ -1,6 +1,7 @@
 import { User } from "../../services/mongoose/index.js";
 import sendMail from "../../services/nodemailer/send_mail.js";
 import { hash } from "../../config/index.js";
+import { Audit } from "../../models/Audit.js";
 
 export const create = async (req, res) => {
   const { email, pass, app: app_id } = req.body;
@@ -13,16 +14,35 @@ export const login = async (req, res) => {
   const { email, pass } = req.body;
   const app_id = req.headers.app;
 
+  const d = {
+    created_at: new Date(),
+    intent: "login",
+    app: app_id,
+    data: req.body,
+  };
+
   try {
     const user = await User.findOne({ email, pass: hash(pass), app_id });
 
     if (!user) {
       res.status(409).json({ info: "Credenciais incorrectas!" });
+      await new Audit({
+        ...d,
+        success: false,
+      }).save();
     } else {
+      await new Audit({
+        ...d,
+        success: true,
+      }).save();
       return res.json(user);
     }
   } catch (error) {
     console.log(error);
+    await new Audit({
+      ...d,
+      success: false,
+    }).save();
     res.status(500).json({ error });
   }
 };
