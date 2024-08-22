@@ -9,11 +9,13 @@ import {
   sendConfirmationCode,
   update,
   byApp,
+  updateAssocUser,
 } from "../../controllers/user/index.js";
 
 const router = express.Router();
 
 router.post("/create", create);
+router.post("/update-assoc-user", updateAssocUser);
 router.post("/login", login);
 router.get("/", all);
 router.get("/:id", user);

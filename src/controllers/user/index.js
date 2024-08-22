@@ -4,9 +4,19 @@ import { hash } from "../../config/index.js";
 import { Audit } from "../../models/Audit.js";
 
 export const create = async (req, res) => {
-  const { email, pass, app: app_id } = req.body;
+  const { email, pass, modulos, perms } = req.body;
+  const data = req.body;
+  const user = req.headers.user;
+  const app_id = req.headers.app;
 
-  const doc = await new User({ email, pass: hash(pass), app_id }).save();
+  const doc = await new User({
+    created_at: new Date(),
+    updated_at: new Date(),
+    ...data,
+    pass: hash(data.pass),
+    app_id,
+    assoc_user: user,
+  }).save();
   res.status(200).json(doc);
 };
 
@@ -22,7 +32,7 @@ export const login = async (req, res) => {
   };
 
   try {
-    const user = await User.findOne({ email, pass: hash(pass), app_id });
+    let user = await User.findOne({ email, pass: hash(pass), app_id });
 
     if (!user) {
       res.status(409).json({ info: "Credenciais incorrectas!" });
@@ -35,7 +45,12 @@ export const login = async (req, res) => {
         ...d,
         success: true,
       }).save();
-      return res.json(user);
+      let assoc_user;
+      if (user.assoc_user) {
+        assoc_user = user;
+        user = await User.findOne({ _id: user.assoc_user });
+      }
+      return res.json({ user, assoc_user });
     }
   } catch (error) {
     console.log(error);
@@ -48,9 +63,8 @@ export const login = async (req, res) => {
 };
 
 export const all = async (req, res) => {
-  const docs = await User.find();
-  const users = docs.map((doc) => ({ ...doc, pass: null }));
-  res.json(users);
+  const data = await User.find();
+  res.json(data);
 };
 
 export const byApp = async (req, res) => {
@@ -126,4 +140,23 @@ export const update = async (req, res) => {
     new: true,
   });
   res.json(updatedUser);
+};
+
+// Assoc user
+export const updateAssocUser = async (req, res) => {
+  const assoc_user = req.headers.assoc_user;
+
+  const data = req.body;
+
+  if (data.pass) {
+    data.pass = hash(data.pass);
+  } else {
+    delete data.pass;
+  }
+
+  const user = await User.findOneAndUpdate({ _id: assoc_user }, data, {
+    new: true,
+  });
+
+  res.json(user);
 };
