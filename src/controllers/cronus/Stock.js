@@ -13,6 +13,26 @@ export const getStock = async (req, res) => {
   }
 };
 
+export const getTotalStock = async (req, res) => {
+  const user = req.headers.user;
+
+  try {
+    const stock = await Stock.find({ user }).sort({desc: 1});
+    let total = 0;
+
+    for (const s of stock) {
+      if(s.tipo === '0') {
+        total += parseFloat(s.valor) || 0;
+      }
+    }
+
+    res.json({total});
+  } catch (error) {
+    console.log(error);
+    res.status(409).json({});
+  }
+};
+
 export const createStock = async (req, res) => {
   const data = req.body;
   const user = req.headers.user;

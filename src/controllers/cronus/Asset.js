@@ -4,7 +4,8 @@ export const getAsset = async (req, res) => {
   const user = req.headers.user;
 
   try {
-    const asset = await Asset.find({user}).sort({desc: 1});
+    let asset = await Asset.find({user}).sort({valor: 1});
+    asset = asset.filter(({removed}) => !removed);
     res.json(asset);
   } catch (error) {
     console.log(error);
