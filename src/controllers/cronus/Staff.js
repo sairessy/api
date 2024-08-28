@@ -40,7 +40,7 @@ export const createStaffCategoria = async (req, res) => {
 export const getStaffCategoria = async (req, res) => {
   const user = req.headers.user;
   try {
-    const categorias = await StaffCategoria.find({user});
+    const categorias = await StaffCategoria.find({user}).sort({ label: 1 });
     res.json(categorias);
   } catch (error) {
     console.log(error);

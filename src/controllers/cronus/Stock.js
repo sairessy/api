@@ -5,7 +5,7 @@ export const getStock = async (req, res) => {
   const user = req.headers.user;
 
   try {
-    const stock = await Stock.find({ user }).sort({desc: 1});
+    const stock = await Stock.find({ user }).sort({ desc: 1 });
     res.json(stock);
   } catch (error) {
     console.log(error);
@@ -17,16 +17,16 @@ export const getTotalStock = async (req, res) => {
   const user = req.headers.user;
 
   try {
-    const stock = await Stock.find({ user }).sort({desc: 1});
+    const stock = await Stock.find({ user }).sort({ desc: 1 });
     let total = 0;
 
     for (const s of stock) {
-      if(s.tipo === '0') {
+      if (s.tipo === "0") {
         total += parseFloat(s.valor) || 0;
       }
     }
 
-    res.json({total});
+    res.json({ total });
   } catch (error) {
     console.log(error);
     res.status(409).json({});
@@ -50,7 +50,9 @@ export const updateStock = async (req, res) => {
   const stock = req.headers.stock;
 
   try {
-    const data = await Stock.findOneAndUpdate({ _id: stock }, req.body, { new: true });
+    const data = await Stock.findOneAndUpdate({ _id: stock }, req.body, {
+      new: true,
+    });
     res.json(data);
   } catch (error) {
     console.log(error);
@@ -86,8 +88,12 @@ export const getStockCategoria = async (req, res) => {
 export const getTotalStockServices = async (req, res) => {
   const user = req.headers.user;
 
-  const stock = (await Stock.find({ user, tipo: '0' })).filter(({ removed }) => !removed);
-  const asset = (await Asset.find({ user, tipo: '0' })).filter(({ removed }) => !removed);
+  const stock = (await Stock.find({ user, tipo: "0" })).filter(
+    ({ removed }) => !removed
+  );
+  const asset = (await Asset.find({ user, tipo: "0" })).filter(
+    ({ removed }) => !removed
+  );
 
   let s_total = 0;
   let a_total = 0;
