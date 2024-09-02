@@ -15,7 +15,7 @@
     "Automation",
     "AI"
   ],
-  "author": "Victorino, Sairesse",
+  "author": "Victorino, Sairesse <sairessy@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "cookie-parser": "^1.4.6",
