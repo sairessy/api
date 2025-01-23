@@ -7,10 +7,10 @@ import cors from "cors";
 import main from "./main/index.js";
 import automata from "./automata/index.js";
 import user from "./user/index.js";
-import machina from './machina/index.js';
-import chatbot from './chatbot/index.js';
-import cronus from './cronus/index.js';
-import ats from './ats/index.js';
+import machina from "./machina/index.js";
+import chatbot from "./chatbot/index.js";
+import cronus from "./cronus/index.js";
+import ats from "./ats/index.js";
 
 // EXPRESS CONFIG.
 const app = express();
@@ -24,9 +24,9 @@ const server = http.createServer(app);
 app.use("/", main);
 app.use("/user", user);
 app.use("/automata", automata);
-app.use('/machina', machina);
-app.use('/chatbot', chatbot);
-app.use('/cronus', cronus);
-app.use('/ats', ats);
+app.use("/machina", machina);
+app.use("/chatbot", chatbot);
+app.use("/cronus", cronus);
+app.use("/ats", ats);
 
 export default server;
