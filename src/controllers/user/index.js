@@ -31,6 +31,7 @@ export const login = async (req, res) => {
     data: req.body,
   };
 
+
   try {
     let user = await User.findOne({ email, pass: hash(pass), app_id });
 
@@ -89,7 +90,7 @@ export const sendConfirmationCode = async (req, res) => {
   const users = await User.find({ email, app_id: app });
   if (users.length === 0) {
     const code = String(Math.random()).substring(2, 7);
-    console.log(code);
+    // console.log(code);
     sendMail(email, app || "", "Codigo de confirmação: " + code);
     res.json({ msg: "Enviamos o código de confirmação para " + email, code });
   } else {
@@ -108,7 +109,7 @@ export const sendRecoveryCode = async (req, res) => {
   } else {
     const code = String(Math.random()).substring(2, 7);
     sendMail(email, app || "", "Código de recuperação:" + code);
-    console.log(code, email, app);
+    // console.log(code, email, app);
     const user = users[0];
     user.recovery_code = code;
     await user.save();
