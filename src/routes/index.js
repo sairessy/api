@@ -29,6 +29,9 @@ app.use("/machina", machina);
 app.use("/chatbot", chatbot);
 app.use("/cronus", cronus);
 app.use("/ats", ats);
+<<<<<<< HEAD
 app.use("/panel", panel);
+=======
+>>>>>>> 96015a146b2480f23eda8a1a05066b2c438603fd
 
 export default server;
